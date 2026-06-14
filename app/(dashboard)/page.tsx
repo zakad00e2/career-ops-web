@@ -97,11 +97,11 @@ export default async function DashboardPage() {
 
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
         {statCards.map(({ label, value, icon: Icon }) => (
-          <Card key={label}>
-            <CardContent className="py-4">
-              <div className="mb-2 flex items-center justify-between">
+          <Card key={label} size="sm" className="flex min-h-28 flex-col py-3">
+            <CardContent className="flex flex-1 flex-col justify-between gap-3 py-0">
+              <div className="flex items-center justify-between">
                 <p className="text-xs text-muted-foreground">{label}</p>
-                <Icon className="text-primary" />
+                <Icon className="size-4 shrink-0 text-primary" />
               </div>
               <p className="text-2xl font-semibold tracking-tight text-foreground">{value}</p>
             </CardContent>
@@ -111,7 +111,7 @@ export default async function DashboardPage() {
 
       <DashboardCharts scoreDist={stats.scoreDist} recentApps={stats.recentApps} />
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
         <Card>
           <CardHeader className="pb-3">
             <CardTitle className="flex items-center gap-2 text-base">
@@ -145,14 +145,14 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="self-start w-full">
           <CardHeader className="pb-3">
             <CardTitle className="flex items-center gap-2 text-base">
               <Star />
               Score Distribution
             </CardTitle>
           </CardHeader>
-          <CardContent className="flex flex-col gap-3">
+          <CardContent className="flex flex-col gap-3 pb-0">
             {[
               { label: '4.5+ Strong match', count: stats.scoreDist.high, color: 'var(--chart-2)' },
               { label: '4.0-4.4 Good match', count: stats.scoreDist.good, color: 'var(--chart-1)' },

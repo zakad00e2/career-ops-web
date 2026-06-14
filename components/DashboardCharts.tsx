@@ -1,14 +1,14 @@
 'use client';
 
 import { BarChart, Bar, CartesianGrid, XAxis, YAxis } from 'recharts';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
 } from '@/components/ui/chart';
-import { BarChart2, TrendingUp } from 'lucide-react';
+import { BarChart2 } from 'lucide-react';
 
 interface Application {
   id: number;
@@ -68,8 +68,6 @@ export function DashboardCharts({
       desktop: scoreDist.low,
     },
   ];
-  const topScoreBucket = [...scoreChartData].sort((a, b) => b.desktop - a.desktop)[0];
-
   const timelineData = recentApps
     .filter(a => a.score)
     .slice(0, 10)
@@ -80,15 +78,15 @@ export function DashboardCharts({
     }));
 
   return (
-    <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-      <Card>
-        <CardHeader>
-          <CardTitle>Score Distribution</CardTitle>
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+      <Card className="flex h-full flex-col">
+        <CardHeader className="pb-2">
+          <CardTitle className="text-base">Score Distribution</CardTitle>
           <CardDescription>Applications grouped by fit score</CardDescription>
         </CardHeader>
-        <CardContent>
-          <ChartContainer config={scoreChartConfig}>
-            <BarChart accessibilityLayer data={scoreChartData}>
+        <CardContent className="flex flex-1 flex-col pb-0">
+          <ChartContainer config={scoreChartConfig} className="aspect-auto min-h-[180px] w-full flex-1">
+            <BarChart accessibilityLayer data={scoreChartData} barCategoryGap={0}>
               <CartesianGrid vertical={false} />
               <XAxis
                 dataKey="bucket"
@@ -100,35 +98,25 @@ export function DashboardCharts({
                 cursor={false}
                 content={<ChartTooltipContent hideLabel />}
               />
-              <Bar dataKey="desktop" fill="var(--color-desktop)" isAnimationActive={false} radius={8} />
+              <Bar dataKey="desktop" fill="var(--color-desktop)" isAnimationActive={false} radius={6} maxBarSize={52} />
             </BarChart>
           </ChartContainer>
         </CardContent>
-        <CardFooter className="flex-col items-start gap-2 text-sm">
-          <div className="flex gap-2 leading-none font-medium">
-            {topScoreBucket.desktop > 0
-              ? `${topScoreBucket.label} leads with ${topScoreBucket.desktop} applications`
-              : 'No scored applications yet'}
-            <TrendingUp />
-          </div>
-          <div className="leading-none text-muted-foreground">
-            Showing total evaluated applications by score range
-          </div>
-        </CardFooter>
       </Card>
 
-      <Card>
-        <CardHeader className="pb-3">
+      <Card className="flex h-full flex-col">
+        <CardHeader className="pb-2">
           <CardTitle className="flex items-center gap-2 text-base">
             <BarChart2 />
             Recent Scores Timeline
           </CardTitle>
+          <CardDescription>Latest evaluations by company</CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="flex flex-1 flex-col pb-0">
           {timelineData.length === 0 ? (
-            <p className="py-10 text-center text-sm text-muted-foreground">No scores yet</p>
+            <p className="flex flex-1 items-center justify-center py-10 text-center text-sm text-muted-foreground">No scores yet</p>
           ) : (
-            <ChartContainer config={timelineChartConfig} className="aspect-auto h-[180px] w-full">
+            <ChartContainer config={timelineChartConfig} className="aspect-auto min-h-[180px] w-full flex-1">
               <BarChart accessibilityLayer data={timelineData} margin={{ top: 6, right: 6, left: -20, bottom: 0 }}>
                 <CartesianGrid vertical={false} />
                 <XAxis dataKey="name" tickLine={false} axisLine={false} tickMargin={8} />
