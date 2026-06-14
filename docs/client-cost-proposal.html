@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>عرض تكاليف — Career-Ops Web</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
+      font-size: 11pt;
+      line-height: 1.7;
+      color: #1a1a1a;
+      background: #fff;
+      padding: 40px 48px;
+    }
+
+    .header {
+      border-bottom: 3px solid #059669;
+      padding-bottom: 20px;
+      margin-bottom: 28px;
+    }
+
+    .header h1 {
+      font-size: 22pt;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 6px;
+    }
+
+    .header .subtitle {
+      font-size: 12pt;
+      color: #555;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 14px;
+      font-size: 10pt;
+      color: #666;
+    }
+
+    h2 {
+      font-size: 14pt;
+      font-weight: 700;
+      color: #059669;
+      margin: 28px 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    h3 {
+      font-size: 11.5pt;
+      font-weight: 600;
+      color: #333;
+      margin: 18px 0 8px;
+    }
+
+    p { margin-bottom: 10px; color: #333; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 18px;
+      font-size: 10pt;
+    }
+
+    th {
+      background: #f4f4f5;
+      font-weight: 600;
+      text-align: right;
+      padding: 9px 12px;
+      border: 1px solid #e4e4e7;
+      color: #18181b;
+    }
+
+    td {
+      padding: 8px 12px;
+      border: 1px solid #e4e4e7;
+      vertical-align: top;
+      color: #3f3f46;
+    }
+
+    tr:nth-child(even) td { background: #fafafa; }
+
+    .highlight-box {
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 16px 0;
+    }
+
+    .highlight-box strong { color: #166534; }
+
+    .summary-box {
+      background: #18181b;
+      color: #fafafa;
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 20px 0;
+      font-size: 10.5pt;
+    }
+
+    .summary-box .row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid #3f3f46;
+    }
+
+    .summary-box .row:last-child { border-bottom: none; font-weight: 700; color: #34d399; }
+
+    ul { margin: 8px 20px 14px 0; }
+    li { margin-bottom: 5px; color: #333; }
+
+    .note {
+      background: #fffbeb;
+      border-right: 4px solid #f59e0b;
+      padding: 12px 16px;
+      margin: 14px 0;
+      font-size: 10pt;
+      color: #78350f;
+    }
+
+    .footer {
+      margin-top: 40px;
+      padding-top: 16px;
+      border-top: 1px solid #e5e5e5;
+      font-size: 9pt;
+      color: #888;
+      text-align: center;
+    }
+
+    .page-break { page-break-before: always; }
+
+    h2.tight-after {
+      margin-top: 18px;
+    }
+
+    h2.page-start {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>عرض تكاليف — تحويل Career-Ops إلى موقع ويب</h1>
+    <p class="subtitle">تفاصيل التكاليف والتشغيل</p>
+    <div class="meta">
+      <span>المشروع: Career-Ops Web Application</span>
+      <span>التاريخ: يونيو 2026</span>
+    </div>
+  </div>
+
+  <h2>1. ملخص المشروع</h2>
+  <p>
+    تحويل نظام <strong>Career-Ops</strong> من أداة سطر أوامر (CLI) إلى تطبيق ويب كامل
+    مبني على <strong>Next.js 15</strong> مع واجهة مستخدم حديثة وقاعدة بيانات سحابية.
+  </p>
+
+  <h3>الصفحات والميزات</h3>
+  <table>
+    <tr><th>الصفحة</th><th>الوظيفة</th></tr>
+    <tr><td>Dashboard</td><td>إحصائيات، رسوم بيانية، نشاط حديث</td></tr>
+    <tr><td>Evaluate</td><td>تقييم وظائف بالذكاء الاصطناعي مع بث مباشر (Streaming)</td></tr>
+    <tr><td>Applications</td><td>متتبع الطلبات مع فلترة وترتيب وتغيير الحالة</td></tr>
+    <tr><td>Pipeline</td><td>قائمة انتظار + مسح بوابات التوظيف تلقائياً</td></tr>
+    <tr><td>Reports</td><td>تقارير تقييم A-G كاملة مع تنزيل PDF</td></tr>
+    <tr><td>Settings</td><td>محرر السيرة الذاتية والملف الشخصي</td></tr>
+  </table>
+
+  <h2 class="tight-after">2. تكاليف التشغيل الشهرية (Infrastructure)</h2>
+  <table>
+    <tr><th>الخدمة</th><th>الاستخدام</th><th>التكلفة الشهرية</th></tr>
+    <tr><td>Neon PostgreSQL</td><td>قاعدة بيانات سحابية</td><td>مجاني (في البداية) → $10 – $20 عند النمو</td></tr>
+    <tr><td>Railway</td><td>استضافة الباك اند</td><td>$5 – $20</td></tr>
+    <tr><td>Anthropic API</td><td>تقييم الوظائف بالذكاء الاصطناعي</td><td>حسب الاستخدام (انظر القسم 3)</td></tr>
+    <tr><td>Domain</td><td>نطاق مخصص</td><td>~$1/شهر ($12–15/سنة)</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <strong>إجمالي تشغيل شهري (بداية):</strong> $10 – $25 &nbsp;|&nbsp;
+    <strong>مع نمو المستخدمين:</strong> $100 – $500+/شهر
+  </div>
+
+  <h2>3. تكلفة الذكاء الاصطناعي (الأهم للربح)</h2>
+  <p>كل تقييم وظيفة يستهلك tokens من Claude API (Anthropic).</p>
+
+  <h3>الأسعار الرسمية (Anthropic)</h3>
+  <table>
+    <tr><th>الموديل</th><th>Input / مليون token</th><th>Output / مليون token</th></tr>
+    <tr><td>Claude Opus 4.8</td><td>$5</td><td>$25</td></tr>
+    <tr><td>Claude Sonnet 4.6 (خيار وسط)</td><td>$3</td><td>$15</td></tr>
+    <tr><td>Claude Haiku 4.5</td><td>$1</td><td>$5</td></tr>
+  </table>
+
+  <h3>تكلفة واقعية لكل تقييم</h3>
+  <table>
+    <tr><th>الموديل</th><th>لكل تقييم واحد</th><th>1,000 تقييم/شهر</th></tr>
+    <tr><td>Claude Opus 4.8 (أعلى جودة)</td><td>~$0.10 – $0.20</td><td>~$100 – $200</td></tr>
+    <tr><td>Claude Sonnet 4.6</td><td>~$0.08 – $0.14</td><td>~$80 – $140</td></tr>
+    <tr><td>Claude Haiku 4.5</td><td>~$0.02 – $0.04</td><td>~$20 – $40</td></tr>
+  </table>
+
+  <h3>أمثلة شهرية</h3>
+  <table>
+    <tr><th>عدد التقييمات/شهر</th><th>تكلفة Opus 4.8</th><th>تكلفة Sonnet 4.6</th><th>تكلفة Haiku 4.5</th></tr>
+    <tr><td>100 تقييم</td><td>$10 – $20</td><td>$8 – $14</td><td>$2 – $4</td></tr>
+    <tr><td>1,000 تقييم</td><td>$100 – $200</td><td>$80 – $140</td><td>$20 – $40</td></tr>
+    <tr><td>10,000 تقييم</td><td>$1,000 – $2,000</td><td>$800 – $1,400</td><td>$200 – $400</td></tr>
+  </table>
+
+  <h2 class="tight-after">4. أجرة التطوير والتنفيذ (مرة واحدة)</h2>
+  <p>تكلفة تحويل النظام من CLI إلى تطبيق ويب كامل — تصميم الواجهات، ربط API، قاعدة البيانات، والصفحات الست.</p>
+  <table>
+    <tr><th>البند</th><th>الوصف</th><th>التكلفة</th></tr>
+    <tr><td>أجرة الشغل</td><td>تطوير Career-Ops Web Application</td><td><strong>$300</strong></td></tr>
+  </table>
+
+  <h2 class="tight-after">5. الملخص المالي</h2>
+  <div class="summary-box">
+    <div class="row"><span>أجرة التطوير والتنفيذ (مرة واحدة)</span><span>$300</span></div>
+    <div class="row"><span>تشغيل شهري (بداية)</span><span>$10 – $25</span></div>
+    <div class="row"><span>تشغيل شهري (مع نمو المستخدمين)</span><span>$100 – $500+</span></div>
+    <div class="row"><span>تكلفة AI لكل تقييم (Opus 4.8)</span><span>$0.10 – $0.20</span></div>
+    <div class="row"><span>إجمالي البداية (تطوير + شهر تشغيل)</span><span>$310 – $325</span></div>
+  </div>
+
+  <div class="footer">
+    Career-Ops Web — عرض تكاليف | يونيو 2026 | وثيقة سرية
+  </div>
+
+</body>
+</html>
