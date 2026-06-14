@@ -5,8 +5,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from '@/components/ui/sidebar';
-
-const isDemoMode = process.env.DEMO_MODE === 'true' || !process.env.DATABASE_URL || process.env.DATABASE_URL?.includes('user:password@host');
+import { isDemoMode } from '@/lib/db/config';
 
 export default function DashboardLayout({
   children,
@@ -17,7 +16,7 @@ export default function DashboardLayout({
     <SidebarProvider>
       <Sidebar />
       <SidebarInset className="min-h-svh bg-background">
-        {isDemoMode && <DemoBanner />}
+        {isDemoMode() && <DemoBanner />}
         <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b bg-background/85 px-4 backdrop-blur-xl md:hidden">
           <SidebarTrigger />
           <div>

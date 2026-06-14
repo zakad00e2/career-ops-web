@@ -1,6 +1,7 @@
 import type { Application, Report, PipelineItem } from './db/schema';
+import { isDemoMode } from './db/config';
 
-export const DEMO_MODE = process.env.DEMO_MODE === 'true' || !process.env.DATABASE_URL || process.env.DATABASE_URL.includes('user:password@host');
+export const DEMO_MODE = isDemoMode();
 
 export const mockApplications: Application[] = [
   { id: 1, num: 1, date: '2026-06-01', company: 'Anthropic', role: 'AI Platform Engineer', score: 4.8, status: 'Interview', hasPdf: '✅', reportPath: '/reports/1', notes: 'Strong match on LLMOps and evals', url: 'https://anthropic.com/careers', createdAt: new Date('2026-06-01'), updatedAt: new Date('2026-06-01') },
