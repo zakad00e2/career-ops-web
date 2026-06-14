@@ -166,7 +166,7 @@ export function Sidebar() {
                 }
               >
                 <Avatar className="size-8 rounded-lg">
-                  <AvatarFallback className="rounded-lg bg-blue-600 text-white">CO</AvatarFallback>
+                  <AvatarFallback className="rounded-lg bg-white text-zinc-900">CO</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">Demo workspace</span>
