@@ -5,14 +5,12 @@ import { usePathname } from 'next/navigation';
 import {
   Briefcase,
   ChevronUp,
-  CircleHelp,
   Database,
   FileText,
   GitBranch,
   LayoutDashboard,
   PlusCircle,
   Radar,
-  Search,
   Settings,
   Sparkles,
   Zap,
@@ -54,8 +52,6 @@ const primaryNav = [
 const toolNav = [
   { href: '/evaluate', label: 'Evaluate', icon: Zap },
   { href: '/settings', label: 'Settings', icon: Settings },
-  { href: '#', label: 'Search', icon: Search },
-  { href: '#', label: 'Help', icon: CircleHelp },
 ];
 
 export function Sidebar() {
@@ -72,8 +68,8 @@ export function Sidebar() {
               tooltip="Career-Ops"
               className="data-[slot=sidebar-menu-button]:p-1.5!"
             >
-              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                <Radar />
+              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-blue-600 text-white">
+                <Radar className="size-4" />
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">Career-Ops</span>
@@ -170,7 +166,7 @@ export function Sidebar() {
                 }
               >
                 <Avatar className="size-8 rounded-lg">
-                  <AvatarFallback className="rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">CO</AvatarFallback>
+                  <AvatarFallback className="rounded-lg bg-blue-600 text-white">CO</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">Demo workspace</span>

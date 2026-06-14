@@ -101,7 +101,7 @@ export default async function DashboardPage() {
             <CardContent className="flex flex-1 flex-col justify-between gap-3 py-0">
               <div className="flex items-center justify-between">
                 <p className="text-xs text-muted-foreground">{label}</p>
-                <Icon className="size-4 shrink-0 text-primary" />
+                <Icon className="size-4 shrink-0 text-blue-600" />
               </div>
               <p className="text-2xl font-semibold tracking-tight text-foreground">{value}</p>
             </CardContent>

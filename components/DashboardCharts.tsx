@@ -28,14 +28,14 @@ interface ScoreDist {
 const scoreChartConfig = {
   desktop: {
     label: 'Applications',
-    color: 'var(--chart-1)',
+    color: 'var(--chart-2)',
   },
 } satisfies ChartConfig;
 
 const timelineChartConfig = {
   score: {
     label: 'Score',
-    color: 'var(--chart-1)',
+    color: 'var(--chart-2)',
   },
 } satisfies ChartConfig;
 
@@ -86,7 +86,7 @@ export function DashboardCharts({
         </CardHeader>
         <CardContent className="flex flex-1 flex-col pb-0">
           <ChartContainer config={scoreChartConfig} className="aspect-auto min-h-[180px] w-full flex-1">
-            <BarChart accessibilityLayer data={scoreChartData} barCategoryGap={0}>
+            <BarChart accessibilityLayer data={scoreChartData} barCategoryGap={0} margin={{ top: 4, right: 4, left: 4, bottom: 0 }}>
               <CartesianGrid vertical={false} />
               <XAxis
                 dataKey="bucket"
@@ -98,7 +98,7 @@ export function DashboardCharts({
                 cursor={false}
                 content={<ChartTooltipContent hideLabel />}
               />
-              <Bar dataKey="desktop" fill="var(--color-desktop)" isAnimationActive={false} radius={6} maxBarSize={52} />
+              <Bar dataKey="desktop" fill="var(--color-desktop)" isAnimationActive={false} radius={6} maxBarSize={58} />
             </BarChart>
           </ChartContainer>
         </CardContent>
