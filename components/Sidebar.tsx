@@ -48,10 +48,10 @@ export function Sidebar() {
               render={<Link href="/" />}
               size="lg"
               tooltip="Career-Ops"
-              className="data-[slot=sidebar-menu-button]:p-1.5!"
+              className="gap-1 data-[slot=sidebar-menu-button]:p-1.5! [&_svg]:size-7!"
             >
-              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-blue-600 text-white">
-                <Radar className="size-4" />
+              <div className="flex aspect-square size-8 shrink-0 items-center justify-center">
+                <Radar className="text-emerald-400" />
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">Career-Ops</span>
