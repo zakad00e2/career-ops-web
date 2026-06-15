@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { desc, eq, sql } from 'drizzle-orm';
 import { Briefcase, CheckCircle, Clock, FileText, GitBranch, Star, TrendingUp } from 'lucide-react';
 import { DashboardCharts } from '@/components/DashboardCharts';
-import { Badge } from '@/components/ui/badge';
+import { StatusBadge } from '@/components/StatusBadge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { db, applications, reports, pipeline } from '@/lib/db';
@@ -135,9 +135,7 @@ export default async function DashboardPage() {
                         {app.score.toFixed(1)}
                       </span>
                     )}
-                    <Badge variant="outline" className="text-xs">
-                      {app.status}
-                    </Badge>
+                    <StatusBadge status={app.status} />
                   </div>
                 </div>
               ))

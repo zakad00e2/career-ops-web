@@ -3,12 +3,12 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { ArrowUpDown, ExternalLink, FileText, RefreshCw, Search, Trash2 } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Skeleton } from '@/components/ui/skeleton';
+import { StatusBadge } from '@/components/StatusBadge';
 import {
   Table,
   TableBody,
@@ -17,7 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { CANONICAL_STATUSES, cn, scoreBg, scoreColor, statusBadgeVariant } from '@/lib/utils';
+import { CANONICAL_STATUSES, cn, scoreBg, scoreColor } from '@/lib/utils';
 
 interface Application {
   id: number;
@@ -150,7 +150,7 @@ export function ApplicationsClient() {
         </Select>
       </div>
 
-      <Card className="overflow-hidden">
+      <Card className="overflow-hidden pt-0">
         <Table>
           <TableHeader>
             <TableRow>
@@ -200,15 +200,13 @@ export function ApplicationsClient() {
                   </TableCell>
                   <TableCell>
                     <Select value={app.status} onValueChange={(v) => { if (v) updateStatus(app.id, v); }}>
-                      <SelectTrigger size="sm" className="w-32">
+                      <SelectTrigger size="sm" className="w-36 border-transparent bg-transparent hover:bg-muted/50 dark:bg-transparent">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="min-w-44">
                         {CANONICAL_STATUSES.map(s => (
                           <SelectItem key={s} value={s}>
-                            <Badge variant={statusBadgeVariant(s)} className="mr-2 text-xs">
-                              {s}
-                            </Badge>
+                            <StatusBadge status={s} className="border-transparent bg-transparent px-0" />
                           </SelectItem>
                         ))}
                       </SelectContent>

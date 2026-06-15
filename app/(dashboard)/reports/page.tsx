@@ -37,8 +37,8 @@ export default async function ReportsPage() {
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {allReports.map(report => (
             <Link key={report.id} href={`/reports/${report.id}`}>
-              <Card className="h-full cursor-pointer transition-colors hover:bg-muted/40">
-                <CardContent className="p-4">
+              <Card className="h-full cursor-pointer py-0 transition-colors hover:bg-muted/40">
+                <CardContent className="px-4 py-3">
                   <div className="mb-3 flex items-start justify-between">
                     <div className="min-w-0 flex-1">
                       <p className="truncate font-semibold text-foreground transition-colors group-hover:text-primary">

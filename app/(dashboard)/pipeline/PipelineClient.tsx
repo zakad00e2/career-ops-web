@@ -108,8 +108,8 @@ export function PipelineClient() {
         </Alert>
       )}
 
-      <Card>
-        <CardHeader className="pb-3">
+      <Card className="gap-2">
+        <CardHeader className="pb-0">
           <CardTitle className="flex items-center gap-2 text-base">
             <Plus />
             Add Job URLs
@@ -129,8 +129,8 @@ export function PipelineClient() {
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader className="pb-3">
+      <Card className="gap-2">
+        <CardHeader className="pb-0">
           <CardTitle className="flex items-center gap-2 text-base">
             <Clock />
             Pending ({pending.length})
@@ -148,7 +148,7 @@ export function PipelineClient() {
             <p className="py-4 text-center text-sm text-muted-foreground">No pending items - run a scan or add URLs above</p>
           ) : (
             pending.map(item => (
-              <div key={item.id} className="flex flex-col gap-3 rounded-lg border bg-background p-3 sm:flex-row sm:items-start">
+              <div key={item.id} className="flex flex-col gap-3 rounded-lg border bg-background p-3 sm:flex-row sm:items-center">
                 <div className="min-w-0 flex-1">
                   <div className="mb-1 flex items-center gap-2">
                     <Badge variant="secondary">{item.status}</Badge>

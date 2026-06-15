@@ -17,11 +17,11 @@ export default function DashboardLayout({
       <Sidebar />
       <SidebarInset className="min-h-svh bg-background">
         {isDemoMode() && <DemoBanner />}
-        <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b bg-background/85 px-4 backdrop-blur-xl md:hidden">
+        <header className="sticky top-0 z-30 flex h-12 items-center gap-2 border-b bg-background/85 px-4 backdrop-blur-xl">
           <SidebarTrigger />
-          <div>
-            <p className="text-sm font-medium">Career-Ops</p>
-            <p className="text-xs text-muted-foreground">AI job search pipeline</p>
+          <div className="min-w-0">
+            <p className="truncate text-sm font-medium text-foreground">Career-Ops</p>
+            <p className="truncate text-xs text-muted-foreground md:hidden">AI job search pipeline</p>
           </div>
         </header>
         <main className="flex-1">
