@@ -1,11 +1,14 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { CheckCircle, Clock, ExternalLink, Loader2, Plus, Radar, RefreshCw, Trash2 } from 'lucide-react';
+import { CheckCircle, Clock, ExternalLink, Loader2, Plus, Radar, RefreshCw, Search, Trash2 } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
@@ -25,6 +28,10 @@ export function PipelineClient() {
   const [addText, setAddText] = useState('');
   const [adding, setAdding] = useState(false);
   const [scanResult, setScanResult] = useState<{ found: number; added: number } | null>(null);
+  const [companies, setCompanies] = useState<string[]>([]);
+  const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const [companyQuery, setCompanyQuery] = useState('');
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -53,10 +60,49 @@ export function PipelineClient() {
     await load();
   }
 
+  // Open the company picker before scanning. Loads the company list on first use
+  // and selects all of them by default.
+  async function openPicker() {
+    if (companies.length === 0) {
+      const list: string[] = await fetch('/api/scan/companies').then(r => r.json());
+      setCompanies(list);
+      setSelected(new Set(list));
+    }
+    setCompanyQuery('');
+    setPickerOpen(true);
+  }
+
+  function toggleCompany(company: string) {
+    setSelected(prev => {
+      const next = new Set(prev);
+      if (next.has(company)) next.delete(company);
+      else next.add(company);
+      return next;
+    });
+  }
+
+  const filteredCompanies = companies.filter(c => c.toLowerCase().includes(companyQuery.trim().toLowerCase()));
+  // Select-all acts on the currently visible (filtered) companies.
+  const allFilteredSelected = filteredCompanies.length > 0 && filteredCompanies.every(c => selected.has(c));
+
+  function toggleSelectAll() {
+    setSelected(prev => {
+      const next = new Set(prev);
+      if (allFilteredSelected) filteredCompanies.forEach(c => next.delete(c));
+      else filteredCompanies.forEach(c => next.add(c));
+      return next;
+    });
+  }
+
   async function handleScan() {
+    setPickerOpen(false);
     setScanning(true);
     setScanResult(null);
-    const res = await fetch('/api/scan', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
+    const res = await fetch('/api/scan', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ companies: [...selected] }),
+    });
     const data = await res.json();
     setScanResult({ found: data.found, added: data.added });
     setScanning(false);
@@ -82,6 +128,55 @@ export function PipelineClient() {
 
   return (
     <div className="flex flex-col gap-6">
+      <Dialog open={pickerOpen} onOpenChange={setPickerOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Choose companies to scan</DialogTitle>
+            <DialogDescription>Select which portals to include in this scan.</DialogDescription>
+          </DialogHeader>
+
+          <div className="relative">
+            <Search className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
+            <Input
+              placeholder="Search companies..."
+              className="pl-8"
+              value={companyQuery}
+              onChange={e => setCompanyQuery(e.target.value)}
+            />
+          </div>
+
+          <div className="flex items-center justify-between border-b pb-2">
+            <span className="text-xs text-muted-foreground">{selected.size} of {companies.length} selected</span>
+            <Button variant="ghost" size="xs" onClick={toggleSelectAll} disabled={filteredCompanies.length === 0}>
+              {allFilteredSelected ? 'Clear all' : 'Select all'}
+            </Button>
+          </div>
+
+          <div className="flex max-h-72 flex-col gap-1 overflow-y-auto">
+            {filteredCompanies.length === 0 ? (
+              <p className="py-4 text-center text-sm text-muted-foreground">No companies match &ldquo;{companyQuery}&rdquo;</p>
+            ) : (
+              filteredCompanies.map(company => (
+                <label
+                  key={company}
+                  className="flex cursor-pointer items-center gap-3 rounded-md px-2 py-2 hover:bg-muted/50"
+                >
+                  <Checkbox checked={selected.has(company)} onCheckedChange={() => toggleCompany(company)} />
+                  <span className="text-sm text-foreground">{company}</span>
+                </label>
+              ))
+            )}
+          </div>
+
+          <DialogFooter showCloseButton>
+            <Button onClick={handleScan} disabled={selected.size === 0}>
+              <Radar />
+              Scan {selected.size} {selected.size === 1 ? 'company' : 'companies'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight text-foreground">Pipeline</h1>
@@ -92,7 +187,7 @@ export function PipelineClient() {
             <RefreshCw className={cn(loading && 'animate-spin')} />
             Refresh
           </Button>
-          <Button size="sm" onClick={handleScan} disabled={scanning}>
+          <Button size="sm" onClick={openPicker} disabled={scanning}>
             {scanning ? <Loader2 className="animate-spin" /> : <Radar />}
             Scan Portals
           </Button>

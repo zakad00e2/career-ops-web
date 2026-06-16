@@ -1,3 +1,5 @@
+import { DEFAULT_TARGETS, type ScanTarget } from './scan-targets';
+
 export interface ScanJob {
   title: string;
   url: string;
@@ -83,12 +85,8 @@ function matchesFilter(title: string, filters: string[]): boolean {
   return filters.some(f => t.includes(f.toLowerCase()));
 }
 
-export interface ScanTarget {
-  company: string;
-  provider: 'greenhouse' | 'ashby' | 'lever';
-  boardToken: string;
-  titleFilter?: string[];
-}
+export type { ScanTarget };
+export { DEFAULT_TARGETS };
 
 export async function scanPortals(
   targets: ScanTarget[],
@@ -121,16 +119,3 @@ export async function scanPortals(
 
   return results;
 }
-
-export const DEFAULT_TARGETS: ScanTarget[] = [
-  { company: 'Anthropic', provider: 'greenhouse', boardToken: 'anthropic', titleFilter: ['AI', 'ML', 'Engineer', 'Product'] },
-  { company: 'OpenAI', provider: 'greenhouse', boardToken: 'openai', titleFilter: ['AI', 'Engineer', 'Product', 'Research'] },
-  { company: 'Cohere', provider: 'greenhouse', boardToken: 'cohere', titleFilter: ['AI', 'Engineer', 'ML'] },
-  { company: 'Mistral', provider: 'ashby', boardToken: 'mistral', titleFilter: ['AI', 'Engineer', 'Product'] },
-  { company: 'Replit', provider: 'greenhouse', boardToken: 'replit', titleFilter: ['AI', 'Engineer', 'Product'] },
-  { company: 'Retool', provider: 'greenhouse', boardToken: 'retool', titleFilter: ['AI', 'Engineer', 'Product'] },
-  { company: 'Vercel', provider: 'lever', boardToken: 'vercel', titleFilter: ['AI', 'Engineer', 'Product'] },
-  { company: 'Linear', provider: 'ashby', boardToken: 'linear', titleFilter: ['AI', 'Engineer', 'Product'] },
-  { company: 'Notion', provider: 'greenhouse', boardToken: 'notion', titleFilter: ['AI', 'Engineer', 'Product'] },
-  { company: 'Figma', provider: 'greenhouse', boardToken: 'figma', titleFilter: ['AI', 'Engineer', 'Product'] },
-];

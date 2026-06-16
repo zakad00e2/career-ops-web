@@ -13,20 +13,21 @@ import { cn, scoreBg, scoreColor } from '@/lib/utils';
 type Status = 'idle' | 'fetching' | 'streaming' | 'done' | 'error';
 
 function parseScore(text: string): number | null {
-  const m = text.match(/\*\*(?:Global Score|Score)[:\s]*([0-9.]+)\s*\/\s*5/i)
-    || text.match(/Global Score[:\s]*([0-9.]+)/i)
-    || text.match(/Score[:\s]*([0-9.]+)\s*\/\s*5/i);
+  // Report header is "**Score:** 4.8/5" — the character class after the label
+  // tolerates the markdown bold (**) and whitespace between "Score:" and the number.
+  const m = text.match(/(?:Global\s+)?Score[:*\s]*([0-9](?:\.[0-9]+)?)\s*\/\s*5/i);
   if (m) return parseFloat(m[1]);
   return null;
 }
 
-export function EvaluateClient() {
-  const [input, setInput] = useState('');
+export function EvaluateClient({ initialUrl = '' }: { initialUrl?: string }) {
+  const [input, setInput] = useState(initialUrl);
   const [status, setStatus] = useState<Status>('idle');
   const [output, setOutput] = useState('');
   const [score, setScore] = useState<number | null>(null);
   const [saved, setSaved] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [downloadingPdf, setDownloadingPdf] = useState(false);
   const [error, setError] = useState('');
   const outputRef = useRef<HTMLDivElement>(null);
   const abortRef = useRef<AbortController | null>(null);
@@ -122,8 +123,7 @@ export function EvaluateClient() {
   async function handleSave() {
     if (!output) return;
 
-    const company = extractField(output, 'Company') || 'Unknown';
-    const role = extractField(output, 'Role') || 'Unknown';
+    const { company, role } = parseCompanyRole(output);
 
     await fetch('/api/applications', {
       method: 'POST',
@@ -154,25 +154,31 @@ export function EvaluateClient() {
   }
 
   async function handleDownloadPdf() {
-    const profile = await fetch('/api/profile').then(r => r.json()).catch(() => ({}));
-    const res = await fetch('/api/pdf', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        cvContent: profile.cv || '',
-        jobDescription: input,
-        profileYml: profile.profileYml || '',
-        candidateName: profile.name || 'Candidate',
-      }),
-    });
+    if (downloadingPdf) return;
+    setDownloadingPdf(true);
+    try {
+      const profile = await fetch('/api/profile').then(r => r.json()).catch(() => ({}));
+      const res = await fetch('/api/pdf', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          cvContent: profile.cv || '',
+          jobDescription: input,
+          profileYml: profile.profileYml || '',
+          candidateName: profile.name || 'Candidate',
+        }),
+      });
 
-    const blob = await res.blob();
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'cv-tailored.pdf';
-    a.click();
-    URL.revokeObjectURL(url);
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'cv-tailored.pdf';
+      a.click();
+      URL.revokeObjectURL(url);
+    } finally {
+      setDownloadingPdf(false);
+    }
   }
 
   async function handleCopy() {
@@ -287,9 +293,9 @@ export function EvaluateClient() {
                     {saved ? 'Saved' : 'Save to Tracker'}
                   </Button>
 
-                  <Button size="sm" variant="outline" onClick={handleDownloadPdf}>
-                    <FileDown />
-                    Download CV PDF
+                  <Button size="sm" variant="outline" onClick={handleDownloadPdf} disabled={downloadingPdf}>
+                    {downloadingPdf ? <Loader2 className="animate-spin" /> : <FileDown />}
+                    {downloadingPdf ? 'Generating PDF...' : 'Download CV PDF'}
                   </Button>
                 </div>
 
@@ -310,14 +316,11 @@ export function EvaluateClient() {
   );
 }
 
-function extractField(text: string, field: string): string {
-  const patterns = [
-    new RegExp(`\\*\\*${field}\\*\\*[:\\s]+([^\\n*|]+)`, 'i'),
-    new RegExp(`${field}[:\\s]+([^\\n*|]+)`, 'i'),
-  ];
-  for (const p of patterns) {
-    const m = text.match(p);
-    if (m) return m[1].trim().replace(/\*+/g, '');
-  }
-  return '';
+// Company and role live only in the report title: "# Evaluation: {Company} — {Role}".
+// There is no "**Company:**"/"**Role:**" field, so we parse the H1 line. The dash
+// must be surrounded by whitespace so intra-word hyphens (e.g. "Front-End") don't split.
+function parseCompanyRole(text: string): { company: string; role: string } {
+  const m = text.match(/^#\s*Evaluation:\s*(.+?)\s+[—–-]\s+(.+?)\s*$/im);
+  if (m) return { company: m[1].trim(), role: m[2].trim() };
+  return { company: 'Unknown', role: 'Unknown' };
 }

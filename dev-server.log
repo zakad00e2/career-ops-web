@@ -1,0 +1,805 @@
+
+> career-ops-web@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.7 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.115:3000
+- Environments: .env.local
+✓ Ready in 1106ms
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\zeka1\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\zeka1\Downloads\career-ops-main\career-ops-web\package-lock.json
+
+
+[browser] Uncaught Error: Failed query: select count(*) from "pipeline" where "pipeline"."status" = $1
+params: pending
+    at NeonHttpPreparedQuery.queryWithCache (about://React/Server/C:%5CUsers%5Czeka1%5CDownloads%5Ccareer-ops-main%5Ccareer-ops-web%5C.next%5Cdev%5Cserver%5Cchunks%5Cssr%5C%5Broot-of-the-server%5D__13ht-g9._.js?101:13660:23)
+    at  NeonHttpPreparedQuery.execute (about://React/Server/C:%5CUsers%5Czeka1%5CDownloads%5Ccareer-ops-main%5Ccareer-ops-web%5C.next%5Cdev%5Cserver%5Cchunks%5Cssr%5C%5Broot-of-the-server%5D__13ht-g9._.js?102:13818:24)
+    at  getStats (about://React/Server/C:%5CUsers%5Czeka1%5CDownloads%5Ccareer-ops-main%5Ccareer-ops-web%5C.next%5Cdev%5Cserver%5Cchunks%5Cssr%5C%5Broot-of-the-server%5D__0ys1y-0._.js?103:833:52)
+    at  DashboardPage (about://React/Server/C:%5CUsers%5Czeka1%5CDownloads%5Ccareer-ops-main%5Ccareer-ops-web%5C.next%5Cdev%5Cserver%5Cchunks%5Cssr%5C%5Broot-of-the-server%5D__0ys1y-0._.js?104:877:19)
+ GET /settings 200 in 3.8s (next.js: 1620ms, application-code: 2.2s)
+ GET / 200 in 6.3s (next.js: 2.6s, application-code: 3.7s)
+ GET /api/profile 200 in 395ms (next.js: 193ms, application-code: 202ms)
+ GET / 200 in 1154ms (next.js: 13ms, application-code: 1141ms)
+ GET /api/profile 200 in 649ms (next.js: 7ms, application-code: 642ms)
+ GET / 200 in 725ms (next.js: 6ms, application-code: 719ms)
+ GET /settings 200 in 93ms (next.js: 6ms, application-code: 87ms)
+ GET /api/profile 200 in 498ms (next.js: 5ms, application-code: 493ms)
+ PUT /api/profile 200 in 587ms (next.js: 4ms, application-code: 583ms)
+ PUT /api/profile 200 in 2.5s (next.js: 3ms, application-code: 2.5s)
+ GET /evaluate 200 in 96ms (next.js: 44ms, application-code: 53ms)
+ GET /api/profile 200 in 574ms (next.js: 4ms, application-code: 570ms)
+ POST /api/evaluate 200 in 65s (next.js: 117ms, application-code: 65s)
+ POST /api/applications 201 in 2.1s (next.js: 128ms, application-code: 1991ms)
+ GET /applications 200 in 175ms (next.js: 98ms, application-code: 77ms)
+ GET /api/applications 200 in 402ms (next.js: 7ms, application-code: 395ms)
+ GET /api/applications 200 in 184ms (next.js: 6ms, application-code: 178ms)
+ POST /api/reports 201 in 3.3s (next.js: 2.9s, application-code: 360ms)
+ PATCH /api/applications/1 200 in 3.7s (next.js: 2.3s, application-code: 1409ms)
+ GET / 200 in 983ms (next.js: 9ms, application-code: 974ms)
+ GET /applications 200 in 49ms (next.js: 4ms, application-code: 44ms)
+ GET /api/applications 200 in 577ms (next.js: 5ms, application-code: 573ms)
+ GET /api/applications 200 in 166ms (next.js: 3ms, application-code: 163ms)
+ GET /pipeline 200 in 107ms (next.js: 54ms, application-code: 53ms)
+ GET /api/pipeline 200 in 700ms (next.js: 69ms, application-code: 631ms)
+ GET /api/pipeline 200 in 189ms (next.js: 3ms, application-code: 186ms)
+ GET /reports 200 in 304ms (next.js: 71ms, application-code: 232ms)
+ GET /reports/1 200 in 1344ms (next.js: 1004ms, application-code: 341ms)
+ GET /applications 200 in 49ms (next.js: 5ms, application-code: 44ms)
+ GET /api/applications 200 in 537ms (next.js: 6ms, application-code: 531ms)
+ GET /api/applications 200 in 209ms (next.js: 11ms, application-code: 198ms)
+ PATCH /api/applications/1 200 in 703ms (next.js: 23ms, application-code: 680ms)
+ PATCH /api/applications/1 200 in 185ms (next.js: 8ms, application-code: 177ms)
+ GET /pipeline 200 in 27ms (next.js: 3ms, application-code: 24ms)
+ GET /api/pipeline 200 in 471ms (next.js: 4ms, application-code: 467ms)
+ GET /api/pipeline 200 in 161ms (next.js: 3ms, application-code: 158ms)
+ GET /applications 200 in 77ms (next.js: 11ms, application-code: 66ms)
+ GET /api/applications 200 in 1448ms (next.js: 8ms, application-code: 1439ms)
+ GET /api/applications 200 in 180ms (next.js: 5ms, application-code: 174ms)
+ GET /reports 200 in 366ms (next.js: 4ms, application-code: 362ms)
+ GET /reports/1 200 in 384ms (next.js: 12ms, application-code: 372ms)
+ GET /pipeline 200 in 80ms (next.js: 16ms, application-code: 64ms)
+ GET /api/pipeline 200 in 564ms (next.js: 6ms, application-code: 557ms)
+ GET /api/pipeline 200 in 162ms (next.js: 4ms, application-code: 158ms)
+ POST /api/pipeline 201 in 196ms (next.js: 4ms, application-code: 192ms)
+ GET /api/pipeline 200 in 305ms (next.js: 2ms, application-code: 303ms)
+ POST /api/scan 200 in 96s (next.js: 334ms, application-code: 95s)
+ GET /api/pipeline 200 in 1661ms (next.js: 5ms, application-code: 1656ms)
+ GET /pipeline 200 in 5.6s (next.js: 810ms, application-code: 4.8s)
+ GET /pipeline 200 in 2.2s (next.js: 1646ms, application-code: 577ms)
+ GET /pipeline 200 in 255ms (next.js: 21ms, application-code: 234ms)
+ GET / 200 in 2.3s (next.js: 718ms, application-code: 1545ms)
+ GET / 200 in 426ms (next.js: 11ms, application-code: 415ms)
+ GET / 200 in 171ms (next.js: 7ms, application-code: 164ms)
+✓ Compiled in 4.5s
+ GET /pipeline 200 in 3.3s (next.js: 544ms, application-code: 2.8s)
+ GET /pipeline 200 in 470ms (next.js: 160ms, application-code: 310ms)
+ GET / 200 in 5.1s (next.js: 685ms, application-code: 4.4s)
+ GET / 200 in 3.3s (next.js: 2.6s, application-code: 766ms)
+ GET /api/pipeline 200 in 4.9s (next.js: 2.1s, application-code: 2.8s)
+ GET /pipeline 200 in 974ms (next.js: 57ms, application-code: 917ms)
+ GET /api/pipeline 200 in 897ms (next.js: 8ms, application-code: 889ms)
+✓ Compiled in 412ms
+ GET /pipeline 200 in 2.2s (next.js: 529ms, application-code: 1650ms)
+ GET /pipeline 200 in 1397ms (next.js: 15ms, application-code: 1382ms)
+ GET / 200 in 1401ms (next.js: 728ms, application-code: 673ms)
+ GET /api/pipeline 200 in 2.3s (next.js: 1332ms, application-code: 949ms)
+ GET /api/pipeline 200 in 2.3s (next.js: 526ms, application-code: 1780ms)
+ GET /pipeline 200 in 346ms (next.js: 8ms, application-code: 338ms)
+ GET /api/pipeline 200 in 1594ms (next.js: 4ms, application-code: 1590ms)
+✓ Compiled in 113ms
+ GET /pipeline 200 in 689ms (next.js: 233ms, application-code: 455ms)
+ GET /pipeline 200 in 684ms (next.js: 399ms, application-code: 285ms)
+ GET / 200 in 242ms (next.js: 64ms, application-code: 177ms)
+[browser] Uncaught ReferenceError: COMPANY_OPTIONS is not defined
+    at PipelineClient (app/(dashboard)/pipeline/PipelineClient.tsx:42:72)
+    at PipelinePage (app\(dashboard)\pipeline\page.tsx:4:10)
+  40 | ...ng] = useState(false);
+  41 | ...ScanDialogOpen] = useState(false);
+> 42 | ...setSelectedCompanies] = useState<string[]>(COMPANY_OPTIONS);
+     |                                               ^
+  43 | ...] = useState('');
+  44 | ...= useState(false);
+  45 | ...Result] = useState<{ found: number; added: number } | null>(null);
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 318ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+⨯ ReferenceError: COMPANY_OPTIONS is not defined
+    at PipelineClient (app\(dashboard)\pipeline\PipelineClient.tsx:168:14)
+  166 |           </DialogHeader>
+  167 |           <div className="grid max-h-[320px] gap-2 overflow-y-auto pr-1 sm:grid-cols-2">
+> 168 |             {COMPANY_OPTIONS.map(company => (
+      |              ^
+  169 |               <Label
+  170 |                 key={company}
+  171 |                 className="flex min-h-10 cursor-pointer items-center gap-3 rounded-md bor... {
+  digest: '1397179217'
+}
+⨯ ReferenceError: COMPANY_OPTIONS is not defined
+    at PipelineClient (app\(dashboard)\pipeline\PipelineClient.tsx:168:14)
+  166 |           </DialogHeader>
+  167 |           <div className="grid max-h-[320px] gap-2 overflow-y-auto pr-1 sm:grid-cols-2">
+> 168 |             {COMPANY_OPTIONS.map(company => (
+      |              ^
+  169 |               <Label
+  170 |                 key={company}
+  171 |                 className="flex min-h-10 cursor-pointer items-center gap-3 rounded-md bor... {
+  digest: '1397179217'
+}
+[browser] Uncaught ReferenceError: COMPANY_OPTIONS is not defined
+    at PipelineClient (app/(dashboard)/pipeline/PipelineClient.tsx:168:14)
+    at Set.forEach (<anonymous>)
+    at PipelinePage (app\(dashboard)\pipeline\page.tsx:4:10)
+  166 |           </DialogHeader>
+  167 |           <div className="grid max-h-[320px] gap-2 overflow-y-auto pr-1 sm:grid-cols-2">
+> 168 |             {COMPANY_OPTIONS.map(company => (
+      |              ^
+  169 |               <Label
+  170 |                 key={company}
+  171 |                 className="flex min-h-10 cursor-pointer items-center gap-3 rounded-md bor...
+ GET /pipeline 500 in 1354ms (next.js: 541ms, application-code: 812ms)
+ GET /pipeline 500 in 1357ms (next.js: 630ms, application-code: 727ms)
+ GET / 200 in 1368ms (next.js: 184ms, application-code: 1184ms)
+ GET / 200 in 193ms (next.js: 9ms, application-code: 184ms)
+[browser] Uncaught ReferenceError: COMPANY_OPTIONS is not defined
+    at PipelineClient (app/(dashboard)/pipeline/PipelineClient.tsx:168:14)
+    at PipelinePage (app\(dashboard)\pipeline\page.tsx:4:10)
+  166 |           </DialogHeader>
+  167 |           <div className="grid max-h-[320px] gap-2 overflow-y-auto pr-1 sm:grid-cols-2">
+> 168 |             {COMPANY_OPTIONS.map(company => (
+      |              ^
+  169 |               <Label
+  170 |                 key={company}
+  171 |                 className="flex min-h-10 cursor-pointer items-center gap-3 rounded-md bor...
+✓ Compiled in 147ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+⨯ ReferenceError: COMPANY_OPTIONS is not defined
+    at PipelineClient (app\(dashboard)\pipeline\PipelineClient.tsx:171:14)
+  169 |           </DialogHeader>
+  170 |           <div className="grid max-h-[320px] gap-2 overflow-y-auto pr-1 sm:grid-cols-2">
+> 171 |             {COMPANY_OPTIONS.map(company => (
+      |              ^
+  172 |               <Label
+  173 |                 key={company}
+  174 |                 className="flex min-h-10 cursor-pointer items-center gap-3 rounded-md bor... {
+  digest: '1397179217'
+}
+⨯ ReferenceError: COMPANY_OPTIONS is not defined
+    at PipelineClient (app\(dashboard)\pipeline\PipelineClient.tsx:171:14)
+  169 |           </DialogHeader>
+  170 |           <div className="grid max-h-[320px] gap-2 overflow-y-auto pr-1 sm:grid-cols-2">
+> 171 |             {COMPANY_OPTIONS.map(company => (
+      |              ^
+  172 |               <Label
+  173 |                 key={company}
+  174 |                 className="flex min-h-10 cursor-pointer items-center gap-3 rounded-md bor... {
+  digest: '1397179217'
+}
+ GET /pipeline 500 in 1236ms (next.js: 189ms, application-code: 1047ms)
+ GET /pipeline 500 in 273ms (next.js: 8ms, application-code: 265ms)
+ GET / 200 in 1263ms (next.js: 812ms, application-code: 451ms)
+✓ Compiled in 106ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+⨯ ReferenceError: COMPANY_OPTIONS is not defined
+    at PipelineClient (app\(dashboard)\pipeline\PipelineClient.tsx:212:14)
+  210 |           </DialogHeader>
+  211 |           <div className="grid max-h-[320px] gap-2 overflow-y-auto pr-1 sm:grid-cols-2">
+> 212 |             {COMPANY_OPTIONS.map(company => (
+      |              ^
+  213 |               <Label
+  214 |                 key={company}
+  215 |                 className="flex min-h-10 cursor-pointer items-center gap-3 rounded-md bor... {
+  digest: '1397179217'
+}
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+⨯ ReferenceError: COMPANY_OPTIONS is not defined
+    at PipelineClient (app\(dashboard)\pipeline\PipelineClient.tsx:212:14)
+  210 |           </DialogHeader>
+  211 |           <div className="grid max-h-[320px] gap-2 overflow-y-auto pr-1 sm:grid-cols-2">
+> 212 |             {COMPANY_OPTIONS.map(company => (
+      |              ^
+  213 |               <Label
+  214 |                 key={company}
+  215 |                 className="flex min-h-10 cursor-pointer items-center gap-3 rounded-md bor... {
+  digest: '1397179217'
+}
+ GET /pipeline 500 in 1158ms (next.js: 162ms, application-code: 995ms)
+ GET /pipeline 500 in 336ms (next.js: 9ms, application-code: 327ms)
+ GET / 200 in 1207ms (next.js: 696ms, application-code: 511ms)
+[browser] Uncaught ReferenceError: COMPANY_OPTIONS is not defined
+    at PipelineClient (app/(dashboard)/pipeline/PipelineClient.tsx:212:14)
+    at PipelinePage (app\(dashboard)\pipeline\page.tsx:4:10)
+  210 |           </DialogHeader>
+  211 |           <div className="grid max-h-[320px] gap-2 overflow-y-auto pr-1 sm:grid-cols-2">
+> 212 |             {COMPANY_OPTIONS.map(company => (
+      |              ^
+  213 |               <Label
+  214 |                 key={company}
+  215 |                 className="flex min-h-10 cursor-pointer items-center gap-3 rounded-md bor...
+⨯ ReferenceError: COMPANY_OPTIONS is not defined
+    at PipelineClient (app\(dashboard)\pipeline\PipelineClient.tsx:212:14)
+  210 |           </DialogHeader>
+  211 |           <div className="grid max-h-[320px] gap-2 overflow-y-auto pr-1 sm:grid-cols-2">
+> 212 |             {COMPANY_OPTIONS.map(company => (
+      |              ^
+  213 |               <Label
+  214 |                 key={company}
+  215 |                 className="flex min-h-10 cursor-pointer items-center gap-3 rounded-md bor... {
+  digest: '1397179217'
+}
+ GET /pipeline 500 in 127ms (next.js: 5ms, application-code: 122ms)
+[browser] Uncaught ReferenceError: COMPANY_OPTIONS is not defined
+    at PipelineClient (app/(dashboard)/pipeline/PipelineClient.tsx:212:14)
+    at PipelinePage (app\(dashboard)\pipeline\page.tsx:4:10)
+  210 |           </DialogHeader>
+  211 |           <div className="grid max-h-[320px] gap-2 overflow-y-auto pr-1 sm:grid-cols-2">
+> 212 |             {COMPANY_OPTIONS.map(company => (
+      |              ^
+  213 |               <Label
+  214 |                 key={company}
+  215 |                 className="flex min-h-10 cursor-pointer items-center gap-3 rounded-md bor...
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 1113ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /pipeline 200 in 2.8s (next.js: 1332ms, application-code: 1504ms)
+ GET /pipeline 200 in 2.8s (next.js: 1185ms, application-code: 1657ms)
+ GET / 200 in 798ms (next.js: 224ms, application-code: 574ms)
+ GET / 200 in 327ms (next.js: 9ms, application-code: 318ms)
+ GET / 200 in 178ms (next.js: 13ms, application-code: 165ms)
+ GET /api/pipeline 200 in 1059ms (next.js: 4ms, application-code: 1054ms)
+ GET /api/pipeline 200 in 1439ms (next.js: 148ms, application-code: 1290ms)
+✓ Compiled in 87ms
+ GET /pipeline 200 in 844ms (next.js: 163ms, application-code: 681ms)
+ GET /pipeline 200 in 278ms (next.js: 8ms, application-code: 270ms)
+ GET / 200 in 854ms (next.js: 366ms, application-code: 488ms)
+ GET /api/pipeline 200 in 1130ms (next.js: 219ms, application-code: 911ms)
+ GET /api/pipeline 200 in 957ms (next.js: 6ms, application-code: 951ms)
+ POST /api/scan 200 in 1176ms (next.js: 90ms, application-code: 1085ms)
+ GET /api/pipeline 200 in 591ms (next.js: 4ms, application-code: 587ms)
+ POST /api/scan 200 in 2.1s (next.js: 2ms, application-code: 2.1s)
+ GET /api/pipeline 200 in 2.2s (next.js: 2ms, application-code: 2.2s)
+ GET / 200 in 763ms (next.js: 4ms, application-code: 759ms)
+ GET /applications 200 in 54ms (next.js: 24ms, application-code: 30ms)
+ GET /api/applications 200 in 1017ms (next.js: 60ms, application-code: 957ms)
+ GET /api/applications 200 in 170ms (next.js: 2ms, application-code: 168ms)
+✓ Compiled in 291ms
+ GET /pipeline 200 in 1104ms (next.js: 185ms, application-code: 919ms)
+ GET /applications 200 in 1104ms (next.js: 466ms, application-code: 638ms)
+ GET /pipeline 200 in 578ms (next.js: 181ms, application-code: 397ms)
+ GET /applications 200 in 569ms (next.js: 308ms, application-code: 261ms)
+ GET /pipeline 200 in 205ms (next.js: 11ms, application-code: 194ms)
+ GET /applications 200 in 202ms (next.js: 125ms, application-code: 77ms)
+ GET / 200 in 1126ms (next.js: 313ms, application-code: 812ms)
+ GET / 200 in 591ms (next.js: 230ms, application-code: 361ms)
+ GET / 200 in 214ms (next.js: 46ms, application-code: 169ms)
+ GET /api/pipeline 200 in 1243ms (next.js: 137ms, application-code: 1106ms)
+ GET /pipeline 200 in 29ms (next.js: 4ms, application-code: 25ms)
+ GET /api/pipeline 200 in 3.2s (next.js: 4ms, application-code: 3.2s)
+ GET / 200 in 1707ms (next.js: 4ms, application-code: 1703ms)
+ GET /applications 200 in 24ms (next.js: 3ms, application-code: 21ms)
+ GET /api/applications 200 in 212ms (next.js: 40ms, application-code: 172ms)
+ GET /api/applications 200 in 171ms (next.js: 3ms, application-code: 168ms)
+ GET /api/pipeline 200 in 2.9s (next.js: 3ms, application-code: 2.9s)
+ GET /applications 200 in 23ms (next.js: 3ms, application-code: 20ms)
+ GET /evaluate 200 in 68ms (next.js: 23ms, application-code: 45ms)
+ GET /api/profile 200 in 1600ms (next.js: 68ms, application-code: 1531ms)
+ POST /api/evaluate 200 in 61s (next.js: 75ms, application-code: 61s)
+ GET /applications 200 in 26ms (next.js: 3ms, application-code: 23ms)
+ GET /api/applications 200 in 1941ms (next.js: 6ms, application-code: 1935ms)
+ GET /api/applications 200 in 881ms (next.js: 2ms, application-code: 879ms)
+ GET /evaluate 200 in 26ms (next.js: 3ms, application-code: 23ms)
+ GET /applications 200 in 25ms (next.js: 3ms, application-code: 22ms)
+ GET /api/applications 200 in 189ms (next.js: 4ms, application-code: 185ms)
+ GET /api/applications 200 in 172ms (next.js: 3ms, application-code: 168ms)
+ GET /pipeline 200 in 24ms (next.js: 3ms, application-code: 21ms)
+ GET /api/pipeline 200 in 2.7s (next.js: 3ms, application-code: 2.7s)
+ GET /reports 200 in 1749ms (next.js: 52ms, application-code: 1697ms)
+ GET /api/pipeline 200 in 2.1s (next.js: 4ms, application-code: 2.1s)
+ GET /evaluate 200 in 38ms (next.js: 4ms, application-code: 34ms)
+ GET /api/profile 200 in 2.1s (next.js: 3ms, application-code: 2.1s)
+ POST /api/evaluate 200 in 52s (next.js: 3ms, application-code: 52s)
+ POST /api/applications 201 in 1784ms (next.js: 3ms, application-code: 1781ms)
+ GET /applications 200 in 30ms (next.js: 4ms, application-code: 26ms)
+ GET /api/applications 200 in 184ms (next.js: 4ms, application-code: 180ms)
+ POST /api/reports 201 in 661ms (next.js: 57ms, application-code: 604ms)
+ GET /api/applications 200 in 677ms (next.js: 2ms, application-code: 675ms)
+ GET /reports 200 in 1221ms (next.js: 3ms, application-code: 1217ms)
+ GET /reports/2 200 in 634ms (next.js: 61ms, application-code: 574ms)
+ GET /applications 200 in 24ms (next.js: 3ms, application-code: 21ms)
+ GET /api/applications 200 in 985ms (next.js: 3ms, application-code: 981ms)
+ GET /api/applications 200 in 672ms (next.js: 3ms, application-code: 669ms)
+ GET /reports 200 in 788ms (next.js: 3ms, application-code: 785ms)
+ GET /reports/2 200 in 231ms (next.js: 8ms, application-code: 223ms)
+ GET /pipeline 200 in 31ms (next.js: 3ms, application-code: 28ms)
+ GET /api/pipeline 200 in 4.7s (next.js: 3ms, application-code: 4.7s)
+ GET /api/pipeline 200 in 2.3s (next.js: 4ms, application-code: 2.3s)
+ GET / 200 in 985ms (next.js: 4ms, application-code: 982ms)
+ GET /applications 200 in 25ms (next.js: 3ms, application-code: 23ms)
+ GET /api/applications 200 in 690ms (next.js: 3ms, application-code: 687ms)
+ GET /api/applications 200 in 171ms (next.js: 3ms, application-code: 168ms)
+✓ Compiled in 321ms
+ GET /applications 200 in 527ms (next.js: 145ms, application-code: 381ms)
+ GET /pipeline 200 in 527ms (next.js: 479ms, application-code: 48ms)
+ GET / 200 in 531ms (next.js: 315ms, application-code: 216ms)
+✓ Compiled in 171ms
+ GET /pipeline 200 in 432ms (next.js: 123ms, application-code: 309ms)
+ GET /applications 200 in 432ms (next.js: 232ms, application-code: 200ms)
+ GET / 200 in 436ms (next.js: 304ms, application-code: 132ms)
+✓ Compiled in 79ms
+ GET /applications 200 in 506ms (next.js: 142ms, application-code: 364ms)
+ GET /pipeline 200 in 508ms (next.js: 234ms, application-code: 274ms)
+ GET / 200 in 509ms (next.js: 321ms, application-code: 189ms)
+ GET /applications 200 in 337ms (next.js: 6ms, application-code: 331ms)
+ GET /api/applications 200 in 1725ms (next.js: 118ms, application-code: 1608ms)
+ GET /evaluate 200 in 194ms (next.js: 110ms, application-code: 83ms)
+ GET / 200 in 1326ms (next.js: 3ms, application-code: 1323ms)
+ GET /api/profile 200 in 2.8s (next.js: 40ms, application-code: 2.8s)
+ POST /api/evaluate 200 in 51s (next.js: 54ms, application-code: 51s)
+ POST /api/applications 201 in 1193ms (next.js: 1917µs, application-code: 1191ms)
+ POST /api/reports 201 in 905ms (next.js: 34ms, application-code: 871ms)
+ GET /api/profile 200 in 1014ms (next.js: 7ms, application-code: 1007ms)
+ GET /api/profile 200 in 954ms (next.js: 2ms, application-code: 952ms)
+ GET /applications 200 in 22ms (next.js: 3ms, application-code: 19ms)
+ GET /api/applications 200 in 173ms (next.js: 4ms, application-code: 169ms)
+ GET /api/applications 200 in 385ms (next.js: 3ms, application-code: 382ms)
+ GET / 200 in 780ms (next.js: 3ms, application-code: 778ms)
+ POST /api/pdf 200 in 27.0s (next.js: 917ms, application-code: 26.1s)
+ POST /api/pdf 200 in 25.4s (next.js: 1887µs, application-code: 25.4s)
+ GET /applications 200 in 37ms (next.js: 3ms, application-code: 33ms)
+ GET /api/applications 200 in 497ms (next.js: 5ms, application-code: 493ms)
+ GET /api/applications 200 in 381ms (next.js: 3ms, application-code: 379ms)
+ GET / 200 in 1046ms (next.js: 3ms, application-code: 1043ms)
+ GET /pipeline 200 in 29ms (next.js: 3ms, application-code: 26ms)
+ GET /api/pipeline 200 in 2.0s (next.js: 47ms, application-code: 1974ms)
+ GET /evaluate 200 in 24ms (next.js: 3ms, application-code: 22ms)
+ GET /api/pipeline 200 in 2.3s (next.js: 3ms, application-code: 2.3s)
+ GET /pipeline 200 in 546ms (next.js: 144ms, application-code: 401ms)
+ GET /evaluate 200 in 546ms (next.js: 284ms, application-code: 263ms)
+ GET / 200 in 292ms (next.js: 132ms, application-code: 160ms)
+ GET /evaluate 200 in 276ms (next.js: 4ms, application-code: 272ms)
+ GET /api/profile 200 in 1273ms (next.js: 98ms, application-code: 1175ms)
+ POST /api/evaluate 200 in 67s (next.js: 69ms, application-code: 67s)
+ POST /api/applications 201 in 1495ms (next.js: 35ms, application-code: 1461ms)
+ POST /api/reports 201 in 388ms (next.js: 34ms, application-code: 354ms)
+ GET /api/profile 200 in 186ms (next.js: 2ms, application-code: 184ms)
+ POST /api/pdf 200 in 22.5s (next.js: 72ms, application-code: 22.4s)
+ GET /applications 200 in 45ms (next.js: 16ms, application-code: 29ms)
+ GET /api/applications 200 in 2.5s (next.js: 4ms, application-code: 2.5s)
+ GET /api/applications 200 in 916ms (next.js: 8ms, application-code: 908ms)
+ GET /reports 200 in 4.6s (next.js: 44ms, application-code: 4.5s)
+✓ Compiled in 81ms
+ GET /pipeline 200 in 261ms (next.js: 215ms, application-code: 46ms)
+ GET /reports 200 in 547ms (next.js: 126ms, application-code: 421ms)
+ GET / 200 in 267ms (next.js: 52ms, application-code: 215ms)
+ GET /reports/4 200 in 1182ms (next.js: 47ms, application-code: 1135ms)
+✓ Compiled in 116ms
+ GET /pipeline 200 in 66ms (next.js: 19ms, application-code: 47ms)
+ GET /reports/4 200 in 534ms (next.js: 395ms, application-code: 139ms)
+ GET / 200 in 541ms (next.js: 184ms, application-code: 357ms)
+✓ Compiled in 77ms
+ GET /pipeline 200 in 127ms (next.js: 27ms, application-code: 100ms)
+ GET /reports/4 200 in 605ms (next.js: 389ms, application-code: 216ms)
+ GET / 200 in 611ms (next.js: 161ms, application-code: 450ms)
+ GET /evaluate 200 in 204ms (next.js: 119ms, application-code: 86ms)
+ GET /api/profile 200 in 938ms (next.js: 105ms, application-code: 833ms)
+ POST /api/evaluate 200 in 60s (next.js: 59ms, application-code: 60s)
+ GET /api/profile 200 in 516ms (next.js: 3ms, application-code: 514ms)
+ POST /api/pdf 200 in 20.4s (next.js: 12ms, application-code: 20.4s)
+ POST /api/applications 201 in 1924ms (next.js: 40ms, application-code: 1884ms)
+ POST /api/reports 201 in 393ms (next.js: 49ms, application-code: 344ms)
+ GET /applications 200 in 60ms (next.js: 22ms, application-code: 37ms)
+⨯ Error: Failed query: select "id", "num", "date", "company", "role", "score", "status", "has_pdf", "report_path", "notes", "url", "created_at", "updated_at" from "applications" order by "applications"."created_at" desc
+params: 
+    at async GET (app\api\applications\route.ts:8:16)
+   6 | export async function GET() {
+   7 |   if (DEMO_MODE) return Response.json(mockApplications);
+>  8 |   const rows = await db
+     |                ^
+   9 |     .select()
+  10 |     .from(applications)
+  11 |     .orderBy(desc(applications.createdAt)); {
+  query: 'select "id", "num", "date", "company", "role", "score", "status", "has_pdf", "report_path", "notes", "url", "created_at", "updated_at" from "applications" order by "applications"."created_at" desc',
+  params: [],
+  [cause]: Error [NeonDbError]: Error connecting to database: TypeError: fetch failed
+      at async GET (app\api\applications\route.ts:8:16)
+     6 | export async function GET() {
+     7 |   if (DEMO_MODE) return Response.json(mockApplications);
+  >  8 |   const rows = await db
+       |                ^
+     9 |     .select()
+    10 |     .from(applications)
+    11 |     .orderBy(desc(applications.createdAt)); {
+    severity: undefined,
+    code: undefined,
+    detail: undefined,
+    hint: undefined,
+    position: undefined,
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: undefined,
+    line: undefined,
+    routine: undefined,
+    sourceError: TypeError: fetch failed
+        at async GET (app\api\applications\route.ts:8:16)
+       6 | export async function GET() {
+       7 |   if (DEMO_MODE) return Response.json(mockApplications);
+    >  8 |   const rows = await db
+         |                ^
+       9 |     .select()
+      10 |     .from(applications)
+      11 |     .orderBy(desc(applications.createdAt)); {
+      [cause]: [Error]
+    }
+  }
+}
+ GET /api/applications 500 in 540ms (next.js: 4ms, application-code: 536ms)
+⨯ Error: Failed query: select "id", "num", "date", "company", "role", "score", "status", "has_pdf", "report_path", "notes", "url", "created_at", "updated_at" from "applications" order by "applications"."created_at" desc
+params: 
+    at async GET (app\api\applications\route.ts:8:16)
+   6 | export async function GET() {
+   7 |   if (DEMO_MODE) return Response.json(mockApplications);
+>  8 |   const rows = await db
+     |                ^
+   9 |     .select()
+  10 |     .from(applications)
+  11 |     .orderBy(desc(applications.createdAt)); {
+  query: 'select "id", "num", "date", "company", "role", "score", "status", "has_pdf", "report_path", "notes", "url", "created_at", "updated_at" from "applications" order by "applications"."created_at" desc',
+  params: [],
+  [cause]: Error [NeonDbError]: Error connecting to database: TypeError: fetch failed
+      at async GET (app\api\applications\route.ts:8:16)
+     6 | export async function GET() {
+     7 |   if (DEMO_MODE) return Response.json(mockApplications);
+  >  8 |   const rows = await db
+       |                ^
+     9 |     .select()
+    10 |     .from(applications)
+    11 |     .orderBy(desc(applications.createdAt)); {
+    severity: undefined,
+    code: undefined,
+    detail: undefined,
+    hint: undefined,
+    position: undefined,
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: undefined,
+    line: undefined,
+    routine: undefined,
+    sourceError: TypeError: fetch failed
+        at async GET (app\api\applications\route.ts:8:16)
+       6 | export async function GET() {
+       7 |   if (DEMO_MODE) return Response.json(mockApplications);
+    >  8 |   const rows = await db
+         |                ^
+       9 |     .select()
+      10 |     .from(applications)
+      11 |     .orderBy(desc(applications.createdAt)); {
+      [cause]: [Error]
+    }
+  }
+}
+ GET /api/applications 500 in 233ms (next.js: 2ms, application-code: 231ms)
+[browser] ⨯ unhandledRejection: SyntaxError: Failed to execute 'json' on 'Response': Unexpected end of JSON input
+    at ApplicationsClient.useCallback[load] (app/(dashboard)/applications/ApplicationsClient.tsx:48:63)
+    at async ApplicationsClient.useCallback[load] (app/(dashboard)/applications/ApplicationsClient.tsx:48:18)
+  46 |   const load = useCallback(async () => {
+  47 |     setLoading(true);
+> 48 |     const data = await fetch('/api/applications').then(r => r.json());
+     |                                                               ^
+  49 |     setApps(data);
+  50 |     setLoading(false);
+  51 |   }, []);
+ GET /applications 200 in 1200ms (next.js: 8ms, application-code: 1192ms)
+ GET /api/applications 200 in 536ms (next.js: 5ms, application-code: 530ms)
+ GET /reports 200 in 1537ms (next.js: 48ms, application-code: 1490ms)
+ GET /reports/5 200 in 229ms (next.js: 15ms, application-code: 214ms)
+ GET /settings 200 in 65ms (next.js: 33ms, application-code: 31ms)
+ GET /api/profile 200 in 856ms (next.js: 3ms, application-code: 853ms)
+ GET /api/profile 200 in 232ms (next.js: 3ms, application-code: 228ms)
+ GET /pipeline 200 in 37ms (next.js: 4ms, application-code: 33ms)
+ GET /api/pipeline 200 in 1372ms (next.js: 76ms, application-code: 1296ms)
+ GET /api/pipeline 200 in 511ms (next.js: 3ms, application-code: 508ms)
+ POST /api/scan 200 in 2.3s (next.js: 56ms, application-code: 2.3s)
+ GET /api/pipeline 200 in 579ms (next.js: 6ms, application-code: 572ms)
+ GET /evaluate?url=https%3A%2F%2Fboards.greenhouse.io%2Ffigma%2Fjobs%2F5839202004%3Fgh_jid%3D5839202004 200 in 109ms (next.js: 4ms, application-code: 106ms)
+ GET /evaluate 200 in 14ms (next.js: 4ms, application-code: 11ms)
+ GET /evaluate 200 in 47ms (next.js: 5ms, application-code: 43ms)
+ GET /pipeline 200 in 35ms (next.js: 4ms, application-code: 31ms)
+ GET /api/pipeline 200 in 3.1s (next.js: 5ms, application-code: 3.1s)
+ GET /api/pipeline 200 in 3.3s (next.js: 8ms, application-code: 3.3s)
+ PATCH /api/pipeline/247 200 in 1339ms (next.js: 1151ms, application-code: 188ms)
+ PATCH /api/pipeline/246 200 in 229ms (next.js: 9ms, application-code: 220ms)
+ GET /applications 200 in 50ms (next.js: 5ms, application-code: 46ms)
+ GET /api/applications 200 in 709ms (next.js: 4ms, application-code: 705ms)
+ GET /api/applications 200 in 183ms (next.js: 9ms, application-code: 175ms)
+ GET /pipeline 200 in 46ms (next.js: 5ms, application-code: 41ms)
+ GET /api/pipeline 200 in 2.3s (next.js: 4ms, application-code: 2.3s)
+ GET /api/pipeline 200 in 1442ms (next.js: 2ms, application-code: 1440ms)
+ GET /evaluate?url=https%3A%2F%2Fboards.greenhouse.io%2Ffigma%2Fjobs%2F5802956004%3Fgh_jid%3D5802956004 200 in 85ms (next.js: 5ms, application-code: 80ms)
+✓ Compiled in 113ms
+ GET /pipeline 200 in 981ms (next.js: 151ms, application-code: 830ms)
+ GET /evaluate?url=https%3A%2F%2Fboards.greenhouse.io%2Ffigma%2Fjobs%2F5802956004%3Fgh_jid%3D5802956004 200 in 984ms (next.js: 616ms, application-code: 368ms)
+ GET /pipeline 200 in 225ms (next.js: 16ms, application-code: 209ms)
+ GET /evaluate?url=https%3A%2F%2Fboards.greenhouse.io%2Ffigma%2Fjobs%2F5802956004%3Fgh_jid%3D5802956004 200 in 224ms (next.js: 152ms, application-code: 72ms)
+ GET / 200 in 998ms (next.js: 288ms, application-code: 710ms)
+ GET / 200 in 236ms (next.js: 65ms, application-code: 172ms)
+✓ Compiled in 184ms
+ GET /pipeline 200 in 1702ms (next.js: 296ms, application-code: 1405ms)
+ GET /evaluate?url=https%3A%2F%2Fboards.greenhouse.io%2Ffigma%2Fjobs%2F5802956004%3Fgh_jid%3D5802956004 200 in 731ms (next.js: 461ms, application-code: 270ms)
+ GET / 200 in 1712ms (next.js: 573ms, application-code: 1140ms)
+ GET /pipeline 200 in 56ms (next.js: 5ms, application-code: 51ms)
+ GET /api/pipeline 200 in 1358ms (next.js: 123ms, application-code: 1235ms)
+ GET /api/pipeline 200 in 411ms (next.js: 3ms, application-code: 408ms)
+ GET /evaluate?url=https%3A%2F%2Fboards.greenhouse.io%2Ffigma%2Fjobs%2F5781928004%3Fgh_jid%3D5781928004 200 in 289ms (next.js: 3ms, application-code: 286ms)
+ GET /api/profile 200 in 658ms (next.js: 45ms, application-code: 613ms)
+ GET /api/fetch-jd?url=https%3A%2F%2Fboards.greenhouse.io%2Ffigma%2Fjobs%2F5781928004%3Fgh_jid%3D5781928004 200 in 995ms (next.js: 243ms, application-code: 752ms)
+ POST /api/evaluate 200 in 40s (next.js: 105ms, application-code: 40s)
+ POST /api/applications 201 in 1410ms (next.js: 55ms, application-code: 1355ms)
+ POST /api/reports 201 in 345ms (next.js: 141ms, application-code: 204ms)
+ GET /applications 200 in 53ms (next.js: 16ms, application-code: 38ms)
+ GET /api/applications 200 in 1106ms (next.js: 7ms, application-code: 1100ms)
+ GET /api/applications 200 in 184ms (next.js: 3ms, application-code: 182ms)
+ PATCH /api/applications/6 200 in 636ms (next.js: 66ms, application-code: 570ms)
+ GET /pipeline 200 in 38ms (next.js: 4ms, application-code: 35ms)
+ GET /api/pipeline 200 in 2.6s (next.js: 4ms, application-code: 2.5s)
+ GET /api/pipeline 200 in 1631ms (next.js: 4ms, application-code: 1627ms)
+ GET /pipeline 200 in 730ms (next.js: 188ms, application-code: 542ms)
+ GET /pipeline 200 in 728ms (next.js: 337ms, application-code: 391ms)
+ GET / 200 in 338ms (next.js: 73ms, application-code: 265ms)
+ GET /pipeline 200 in 514ms (next.js: 152ms, application-code: 362ms)
+ GET /pipeline 200 in 514ms (next.js: 451ms, application-code: 63ms)
+ GET / 200 in 518ms (next.js: 281ms, application-code: 237ms)
+ GET /pipeline 200 in 1077ms (next.js: 159ms, application-code: 918ms)
+ GET /pipeline 200 in 1078ms (next.js: 263ms, application-code: 815ms)
+ GET /pipeline 200 in 503ms (next.js: 6ms, application-code: 497ms)
+ GET /pipeline 200 in 503ms (next.js: 73ms, application-code: 430ms)
+ GET /pipeline 200 in 252ms (next.js: 12ms, application-code: 240ms)
+ GET /pipeline 200 in 248ms (next.js: 71ms, application-code: 177ms)
+ GET / 200 in 1096ms (next.js: 389ms, application-code: 707ms)
+ GET / 200 in 388ms (next.js: 18ms, application-code: 370ms)
+ GET / 200 in 189ms (next.js: 75ms, application-code: 114ms)
+ GET /pipeline 200 in 808ms (next.js: 168ms, application-code: 639ms)
+ GET /pipeline 200 in 503ms (next.js: 382ms, application-code: 121ms)
+ GET / 200 in 509ms (next.js: 88ms, application-code: 422ms)
+ GET /pipeline 200 in 96ms (next.js: 17ms, application-code: 79ms)
+ GET /pipeline 200 in 40ms (next.js: 7ms, application-code: 33ms)
+ GET / 200 in 416ms (next.js: 150ms, application-code: 266ms)
+ POST /api/scan 200 in 3.5s (next.js: 75ms, application-code: 3.5s)
+ GET /api/pipeline 200 in 605ms (next.js: 50ms, application-code: 555ms)
+ GET /api/pipeline 200 in 987ms (next.js: 2ms, application-code: 985ms)
+ GET /pipeline 200 in 512ms (next.js: 143ms, application-code: 369ms)
+ GET /pipeline 200 in 69ms (next.js: 5ms, application-code: 63ms)
+ GET / 200 in 285ms (next.js: 60ms, application-code: 225ms)
+ GET /api/pipeline 200 in 1150ms (next.js: 121ms, application-code: 1028ms)
+ POST /api/scan 200 in 28.5s (next.js: 79ms, application-code: 28.4s)
+ GET /api/pipeline 200 in 4.3s (next.js: 2ms, application-code: 4.3s)
+✓ Compiled in 916ms
+ GET /pipeline 200 in 1441ms (next.js: 466ms, application-code: 975ms)
+ GET /pipeline 200 in 1442ms (next.js: 761ms, application-code: 681ms)
+ GET /pipeline 200 in 732ms (next.js: 97ms, application-code: 635ms)
+ GET /pipeline 200 in 735ms (next.js: 7ms, application-code: 728ms)
+ GET /pipeline 200 in 810ms (next.js: 8ms, application-code: 801ms)
+ GET /pipeline 200 in 882ms (next.js: 33ms, application-code: 849ms)
+ GET /pipeline 200 in 882ms (next.js: 77ms, application-code: 806ms)
+ GET /pipeline 200 in 881ms (next.js: 244ms, application-code: 637ms)
+ GET /pipeline 200 in 881ms (next.js: 320ms, application-code: 561ms)
+ GET /pipeline 200 in 886ms (next.js: 276ms, application-code: 610ms)
+ GET / 200 in 2.0s (next.js: 619ms, application-code: 1429ms)
+ GET /pipeline 200 in 738ms (next.js: 7ms, application-code: 731ms)
+ GET /pipeline 200 in 612ms (next.js: 8ms, application-code: 604ms)
+ GET / 200 in 1256ms (next.js: 40ms, application-code: 1216ms)
+ GET /pipeline 200 in 594ms (next.js: 11ms, application-code: 582ms)
+ GET /pipeline 200 in 594ms (next.js: 68ms, application-code: 526ms)
+ GET / 200 in 1346ms (next.js: 158ms, application-code: 1187ms)
+ GET / 200 in 1347ms (next.js: 107ms, application-code: 1241ms)
+ GET / 200 in 1347ms (next.js: 203ms, application-code: 1144ms)
+ GET /pipeline 200 in 572ms (next.js: 26ms, application-code: 546ms)
+ GET /pipeline 200 in 572ms (next.js: 60ms, application-code: 511ms)
+ GET /pipeline 200 in 727ms (next.js: 10ms, application-code: 717ms)
+ GET /pipeline 200 in 727ms (next.js: 40ms, application-code: 687ms)
+ GET /pipeline 200 in 726ms (next.js: 74ms, application-code: 652ms)
+ GET /pipeline 200 in 777ms (next.js: 129ms, application-code: 648ms)
+ GET /pipeline 200 in 779ms (next.js: 100ms, application-code: 679ms)
+ GET /pipeline 200 in 778ms (next.js: 167ms, application-code: 611ms)
+ GET / 200 in 1307ms (next.js: 61ms, application-code: 1246ms)
+ GET /pipeline 200 in 757ms (next.js: 10ms, application-code: 746ms)
+ GET /pipeline 200 in 752ms (next.js: 47ms, application-code: 705ms)
+ GET /pipeline 200 in 598ms (next.js: 11ms, application-code: 588ms)
+ GET /pipeline 200 in 599ms (next.js: 38ms, application-code: 561ms)
+ GET /pipeline 200 in 409ms (next.js: 8ms, application-code: 401ms)
+ GET /pipeline 200 in 409ms (next.js: 33ms, application-code: 376ms)
+ GET /pipeline 200 in 415ms (next.js: 7ms, application-code: 408ms)
+ GET /pipeline 200 in 416ms (next.js: 37ms, application-code: 379ms)
+ GET /pipeline 200 in 416ms (next.js: 60ms, application-code: 356ms)
+ GET /pipeline 200 in 472ms (next.js: 85ms, application-code: 387ms)
+ GET /pipeline 200 in 473ms (next.js: 120ms, application-code: 353ms)
+ GET / 200 in 1047ms (next.js: 7ms, application-code: 1040ms)
+ GET /pipeline 200 in 397ms (next.js: 80ms, application-code: 318ms)
+ GET / 200 in 1085ms (next.js: 82ms, application-code: 1004ms)
+ GET / 200 in 1062ms (next.js: 126ms, application-code: 936ms)
+ GET / 200 in 1065ms (next.js: 16ms, application-code: 1050ms)
+ GET / 200 in 1066ms (next.js: 71ms, application-code: 995ms)
+ GET /pipeline 200 in 561ms (next.js: 12ms, application-code: 549ms)
+ GET /pipeline 200 in 557ms (next.js: 39ms, application-code: 518ms)
+ GET /pipeline 200 in 720ms (next.js: 5ms, application-code: 714ms)
+ GET /pipeline 200 in 720ms (next.js: 36ms, application-code: 684ms)
+ GET /pipeline 200 in 752ms (next.js: 33ms, application-code: 719ms)
+ GET /pipeline 200 in 753ms (next.js: 8ms, application-code: 746ms)
+ GET / 200 in 1067ms (next.js: 38ms, application-code: 1029ms)
+ GET /pipeline 200 in 751ms (next.js: 16ms, application-code: 735ms)
+ GET /pipeline 200 in 750ms (next.js: 44ms, application-code: 706ms)
+ GET /pipeline 200 in 751ms (next.js: 74ms, application-code: 676ms)
+ GET /pipeline 200 in 855ms (next.js: 107ms, application-code: 747ms)
+ GET /pipeline 200 in 755ms (next.js: 64ms, application-code: 691ms)
+ GET /pipeline 200 in 672ms (next.js: 54ms, application-code: 618ms)
+ GET /pipeline 200 in 478ms (next.js: 8ms, application-code: 470ms)
+ GET /pipeline 200 in 477ms (next.js: 62ms, application-code: 415ms)
+ GET /pipeline 200 in 384ms (next.js: 40ms, application-code: 344ms)
+ GET /pipeline 200 in 387ms (next.js: 8ms, application-code: 379ms)
+ GET / 200 in 995ms (next.js: 94ms, application-code: 901ms)
+ GET /pipeline 200 in 391ms (next.js: 7ms, application-code: 384ms)
+ GET /pipeline 200 in 392ms (next.js: 36ms, application-code: 356ms)
+ GET / 200 in 916ms (next.js: 5ms, application-code: 912ms)
+ GET /pipeline 200 in 382ms (next.js: 7ms, application-code: 375ms)
+ GET /pipeline 200 in 381ms (next.js: 66ms, application-code: 316ms)
+ GET /pipeline 200 in 384ms (next.js: 43ms, application-code: 341ms)
+ GET /pipeline 200 in 436ms (next.js: 9ms, application-code: 426ms)
+ GET /pipeline 200 in 436ms (next.js: 33ms, application-code: 403ms)
+ GET / 200 in 1055ms (next.js: 6ms, application-code: 1049ms)
+ GET / 200 in 1056ms (next.js: 73ms, application-code: 983ms)
+ GET / 200 in 1057ms (next.js: 153ms, application-code: 904ms)
+ GET /pipeline 200 in 432ms (next.js: 7ms, application-code: 426ms)
+ GET / 200 in 1113ms (next.js: 63ms, application-code: 1050ms)
+ GET /pipeline 200 in 798ms (next.js: 9ms, application-code: 789ms)
+ GET /pipeline 200 in 798ms (next.js: 38ms, application-code: 760ms)
+ GET /pipeline 200 in 766ms (next.js: 63ms, application-code: 702ms)
+ GET /pipeline 200 in 768ms (next.js: 40ms, application-code: 728ms)
+ GET /pipeline 200 in 814ms (next.js: 55ms, application-code: 759ms)
+ GET /pipeline 200 in 815ms (next.js: 99ms, application-code: 716ms)
+ GET /pipeline 200 in 692ms (next.js: 12ms, application-code: 680ms)
+ GET /pipeline 200 in 696ms (next.js: 55ms, application-code: 641ms)
+ GET /pipeline 200 in 692ms (next.js: 88ms, application-code: 604ms)
+ GET /pipeline 200 in 629ms (next.js: 13ms, application-code: 616ms)
+ GET /pipeline 200 in 629ms (next.js: 50ms, application-code: 579ms)
+ GET /pipeline 200 in 634ms (next.js: 212ms, application-code: 422ms)
+ GET / 200 in 1169ms (next.js: 6ms, application-code: 1163ms)
+ GET / 200 in 1120ms (next.js: 86ms, application-code: 1034ms)
+ GET /pipeline 200 in 498ms (next.js: 78ms, application-code: 420ms)
+ GET /pipeline 200 in 425ms (next.js: 37ms, application-code: 388ms)
+ GET /pipeline 200 in 406ms (next.js: 35ms, application-code: 371ms)
+ GET /pipeline 200 in 407ms (next.js: 63ms, application-code: 344ms)
+ GET /pipeline 200 in 480ms (next.js: 34ms, application-code: 445ms)
+ GET /pipeline 200 in 482ms (next.js: 8ms, application-code: 473ms)
+ GET / 200 in 1089ms (next.js: 81ms, application-code: 1008ms)
+ GET / 200 in 1089ms (next.js: 161ms, application-code: 928ms)
+ GET / 200 in 1094ms (next.js: 221ms, application-code: 872ms)
+ GET /pipeline 200 in 483ms (next.js: 8ms, application-code: 474ms)
+ GET /pipeline 200 in 484ms (next.js: 35ms, application-code: 449ms)
+ GET /pipeline 200 in 484ms (next.js: 59ms, application-code: 425ms)
+ GET /pipeline 200 in 612ms (next.js: 7ms, application-code: 605ms)
+ GET /pipeline 200 in 612ms (next.js: 33ms, application-code: 579ms)
+ GET / 200 in 1059ms (next.js: 20ms, application-code: 1039ms)
+ GET /pipeline 200 in 610ms (next.js: 5ms, application-code: 605ms)
+ GET /pipeline 200 in 524ms (next.js: 47ms, application-code: 477ms)
+ GET /pipeline 200 in 524ms (next.js: 74ms, application-code: 450ms)
+ GET /pipeline 200 in 454ms (next.js: 65ms, application-code: 389ms)
+ GET /pipeline 200 in 456ms (next.js: 40ms, application-code: 416ms)
+ GET /pipeline 200 in 352ms (next.js: 10ms, application-code: 342ms)
+ GET /pipeline 200 in 352ms (next.js: 45ms, application-code: 307ms)
+ GET / 200 in 615ms (next.js: 9ms, application-code: 606ms)
+ GET / 200 in 549ms (next.js: 12ms, application-code: 537ms)
+ GET / 200 in 518ms (next.js: 145ms, application-code: 373ms)
+ GET / 200 in 523ms (next.js: 83ms, application-code: 440ms)
+ GET / 200 in 444ms (next.js: 140ms, application-code: 304ms)
+ GET / 200 in 483ms (next.js: 5ms, application-code: 479ms)
+ GET / 200 in 486ms (next.js: 4ms, application-code: 482ms)
+ GET / 200 in 405ms (next.js: 4ms, application-code: 401ms)
+ GET / 200 in 485ms (next.js: 5ms, application-code: 480ms)
+ GET / 200 in 486ms (next.js: 82ms, application-code: 404ms)
+ GET / 200 in 488ms (next.js: 153ms, application-code: 334ms)
+ GET / 200 in 402ms (next.js: 4ms, application-code: 398ms)
+ GET / 200 in 398ms (next.js: 4ms, application-code: 394ms)
+ GET / 200 in 321ms (next.js: 7ms, application-code: 314ms)
+ GET / 200 in 348ms (next.js: 5ms, application-code: 344ms)
+ GET / 200 in 348ms (next.js: 59ms, application-code: 290ms)
+ GET / 200 in 293ms (next.js: 57ms, application-code: 236ms)
+ GET / 200 in 189ms (next.js: 8ms, application-code: 182ms)
+ GET / 200 in 121ms (next.js: 4ms, application-code: 116ms)
+ GET / 200 in 56ms (next.js: 4ms, application-code: 52ms)
+✓ Compiled in 67ms
+ GET /pipeline 200 in 740ms (next.js: 266ms, application-code: 474ms)
+ GET /pipeline 200 in 742ms (next.js: 160ms, application-code: 582ms)
+ GET / 200 in 743ms (next.js: 387ms, application-code: 356ms)
+ GET /api/pipeline 200 in 3.0s (next.js: 118ms, application-code: 2.9s)
+ GET /api/pipeline 200 in 3.3s (next.js: 136ms, application-code: 3.1s)
+✓ Compiled in 104ms
+ GET /pipeline 200 in 810ms (next.js: 471ms, application-code: 339ms)
+ GET /pipeline 200 in 217ms (next.js: 15ms, application-code: 201ms)
+ GET / 200 in 816ms (next.js: 158ms, application-code: 658ms)
+ GET /api/pipeline 200 in 1901ms (next.js: 123ms, application-code: 1778ms)
+ GET /api/pipeline 200 in 2.6s (next.js: 143ms, application-code: 2.5s)
+✓ Compiled in 69ms
+ GET /pipeline 200 in 723ms (next.js: 206ms, application-code: 517ms)
+ GET /pipeline 200 in 723ms (next.js: 343ms, application-code: 379ms)
+ GET / 200 in 726ms (next.js: 435ms, application-code: 291ms)
+ GET /api/pipeline 200 in 968ms (next.js: 96ms, application-code: 872ms)
+ GET /api/pipeline 200 in 1105ms (next.js: 110ms, application-code: 995ms)
+✓ Compiled in 58ms
+ GET /pipeline 200 in 902ms (next.js: 164ms, application-code: 738ms)
+ GET /pipeline 200 in 906ms (next.js: 280ms, application-code: 626ms)
+ GET / 200 in 927ms (next.js: 353ms, application-code: 574ms)
+ GET /api/pipeline 200 in 1204ms (next.js: 9ms, application-code: 1195ms)
+ GET /api/pipeline 200 in 3.0s (next.js: 269ms, application-code: 2.7s)
+✓ Compiled in 338ms
+ GET /pipeline 200 in 626ms (next.js: 202ms, application-code: 423ms)
+ GET /pipeline 200 in 53ms (next.js: 5ms, application-code: 49ms)
+ GET / 200 in 1078ms (next.js: 204ms, application-code: 874ms)
+ GET / 200 in 632ms (next.js: 444ms, application-code: 188ms)
+ GET /api/pipeline 200 in 1802ms (next.js: 120ms, application-code: 1683ms)
+ GET /api/scan/companies 200 in 237ms (next.js: 231ms, application-code: 6ms)
+✓ Compiled in 88ms
+ GET /pipeline 200 in 732ms (next.js: 528ms, application-code: 204ms)
+ GET / 200 in 736ms (next.js: 182ms, application-code: 554ms)
+ GET /api/pipeline 200 in 1845ms (next.js: 82ms, application-code: 1764ms)
+✓ Compiled in 64ms
+ GET /pipeline 200 in 569ms (next.js: 402ms, application-code: 167ms)
+ GET / 200 in 573ms (next.js: 139ms, application-code: 434ms)
+ GET /api/pipeline 200 in 1764ms (next.js: 63ms, application-code: 1702ms)
+✓ Compiled in 162ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+⨯ ReferenceError: allSelected is not defined
+    at PipelineClient (app\(dashboard)\pipeline\PipelineClient.tsx:145:16)
+  143 |               onClick={() => setSelected(allSelected ? new Set() : new Set(companies))}
+  144 |             >
+> 145 |               {allSelected ? 'Clear all' : 'Select all'}
+      |                ^
+  146 |             </Button>
+  147 |           </div>
+  148 | {
+  digest: '3365532414'
+}
+ GET /pipeline 200 in 1000ms (next.js: 160ms, application-code: 840ms)
+ GET /pipeline 500 in 538ms (next.js: 6ms, application-code: 533ms)
+ GET / 200 in 1007ms (next.js: 301ms, application-code: 705ms)
+[browser] Uncaught ReferenceError: allSelected is not defined
+    at PipelineClient (app/(dashboard)/pipeline/PipelineClient.tsx:145:16)
+    at PipelinePage (app\(dashboard)\pipeline\page.tsx:4:10)
+  143 |               onClick={() => setSelected(allSelected ? new Set() : new Set(companies))}
+  144 |             >
+> 145 |               {allSelected ? 'Clear all' : 'Select all'}
+      |                ^
+  146 |             </Button>
+  147 |           </div>
+  148 |
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 280ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /pipeline 200 in 1919ms (next.js: 366ms, application-code: 1553ms)
+ GET / 200 in 833ms (next.js: 268ms, application-code: 565ms)
+ GET / 200 in 226ms (next.js: 12ms, application-code: 214ms)
+ GET / 200 in 129ms (next.js: 7ms, application-code: 122ms)
+ GET /api/pipeline 200 in 1323ms (next.js: 144ms, application-code: 1179ms)
+ GET /pipeline 200 in 170ms (next.js: 25ms, application-code: 145ms)
+ GET /api/pipeline 200 in 3.0s (next.js: 2ms, application-code: 3.0s)
+ GET /api/scan/companies 200 in 17ms (next.js: 14ms, application-code: 3ms)
+ POST /api/scan 200 in 3.2s (next.js: 54ms, application-code: 3.1s)
+ GET /api/pipeline 200 in 745ms (next.js: 3ms, application-code: 743ms)
+[?25h
