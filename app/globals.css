@@ -152,3 +152,12 @@ html.dark {
   --chart-4: oklch(0.75 0 0);
   --chart-5: oklch(0.62 0 0);
 }
+
+button:not(:disabled):not([aria-disabled="true"]),
+button:not(:disabled):not([aria-disabled="true"]) *,
+a[href]:not([aria-disabled="true"]),
+a[href]:not([aria-disabled="true"]) *,
+[role="button"]:not([aria-disabled="true"]),
+[role="button"]:not([aria-disabled="true"]) * {
+  cursor: pointer !important;
+}

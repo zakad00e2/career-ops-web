@@ -169,13 +169,25 @@ export function EvaluateClient({ initialUrl = '' }: { initialUrl?: string }) {
         }),
       });
 
-      const blob = await res.blob();
+      if (!res.ok) {
+        const detail = await res.json().catch(() => ({}));
+        throw new Error(detail.error || 'Failed to generate CV');
+      }
+
+      // The route returns a print-ready HTML document. Open it in a new tab so
+      // the browser's print dialog ("Save as PDF") handles the PDF export.
+      const html = await res.text();
+      const blob = new Blob([html], { type: 'text/html' });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'cv-tailored.pdf';
-      a.click();
-      URL.revokeObjectURL(url);
+      const win = window.open(url, '_blank');
+      if (!win) {
+        // Popup blocked — fall back to downloading the HTML.
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'cv-tailored.html';
+        a.click();
+      }
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
     } finally {
       setDownloadingPdf(false);
     }
@@ -295,7 +307,7 @@ export function EvaluateClient({ initialUrl = '' }: { initialUrl?: string }) {
 
                   <Button size="sm" variant="outline" onClick={handleDownloadPdf} disabled={downloadingPdf}>
                     {downloadingPdf ? <Loader2 className="animate-spin" /> : <FileDown />}
-                    {downloadingPdf ? 'Generating PDF...' : 'Download CV PDF'}
+                    {downloadingPdf ? 'Preparing CV...' : 'Print / Save CV PDF'}
                   </Button>
                 </div>
 

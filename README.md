@@ -48,6 +48,27 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000)
 
+## Deploying to Vercel
+
+Local `.env.local` values are not uploaded to Vercel automatically. Add these server-side environment variables in the Vercel project before deploying:
+
+```env
+DATABASE_URL=postgresql://user:password@host/dbname?sslmode=require
+ANTHROPIC_API_KEY=sk-ant-...
+CAREER_OPS_ROOT=..
+```
+
+In the Vercel dashboard, open **Project Settings -> Environment Variables**, add `ANTHROPIC_API_KEY`, and scope it to **Production**. Also add it to **Preview** if you test preview deployments.
+
+If the project is linked locally and the Vercel CLI is available, the same variable can be added with:
+
+```bash
+vercel env add ANTHROPIC_API_KEY production
+vercel env add ANTHROPIC_API_KEY preview
+```
+
+Redeploy after changing environment variables; existing deployments do not automatically pick up new values.
+
 ## Architecture
 
 ```

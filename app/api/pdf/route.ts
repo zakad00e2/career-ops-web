@@ -1,8 +1,6 @@
 import { NextRequest } from 'next/server';
 import { getTemplateHtml } from '@/lib/modes';
 import { getAnthropic, MODEL } from '@/lib/claude';
-import path from 'path';
-import { existsSync } from 'fs';
 
 export const runtime = 'nodejs';
 export const maxDuration = 120;
@@ -258,49 +256,24 @@ export async function POST(req: NextRequest) {
 
     const name = candidateName || data.name || 'Candidate';
 
-    let template = fillTemplate(getTemplateHtml(), data, name);
+    const template = fillTemplate(getTemplateHtml(), data, name);
 
-    // Try to use Playwright for PDF generation
-    try {
-      // dynamically require playwright to avoid missing type errors at compile time
-      // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-explicit-any
-      const pw = require('playwright') as any;
-      const chromium = pw.chromium;
+    // Return a print-ready HTML document instead of rendering a PDF server-side.
+    // Vercel's serverless functions cannot run a headless Chromium (no browser
+    // binary, function-size limits), so we let the browser produce the PDF via
+    // "Print → Save as PDF". An auto-print script opens the dialog on load.
+    const printScript =
+      '<script>window.addEventListener("load",function(){setTimeout(function(){window.print();},400);});</script>';
+    const printable = template.includes('</body>')
+      ? template.replace('</body>', `${printScript}</body>`)
+      : template + printScript;
 
-      // Fix font paths for server-side rendering
-      const careerOpsRoot = process.env.CAREER_OPS_ROOT
-        ? path.resolve(process.cwd(), process.env.CAREER_OPS_ROOT)
-        : path.resolve(process.cwd(), '..');
-      const fontsDir = path.join(careerOpsRoot, 'fonts');
-      if (existsSync(fontsDir)) {
-        template = template.replace(/url\('\.\/fonts\//g, `url('file://${fontsDir.replace(/\\/g, '/')}/`);
-      }
-
-      const browser = await chromium.launch();
-      const page = await browser.newPage();
-      await page.setContent(template, { waitUntil: 'networkidle' });
-      const pdfBuffer = await page.pdf({
-        format: 'A4',
-        printBackground: true,
-        margin: { top: '20mm', right: '15mm', bottom: '20mm', left: '15mm' },
-      });
-      await browser.close();
-
-      return new Response(pdfBuffer, {
-        headers: {
-          'Content-Type': 'application/pdf',
-          'Content-Disposition': `attachment; filename="${slugify(name)}-cv.pdf"`,
-        },
-      });
-    } catch {
-      // Playwright not available — return HTML
-      return new Response(template, {
-        headers: {
-          'Content-Type': 'text/html; charset=utf-8',
-          'Content-Disposition': `attachment; filename="${slugify(name)}-cv.html"`,
-        },
-      });
-    }
+    return new Response(printable, {
+      headers: {
+        'Content-Type': 'text/html; charset=utf-8',
+        'Content-Disposition': `inline; filename="${slugify(name)}-cv.html"`,
+      },
+    });
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown error';
     return Response.json({ error: message }, { status: 500 });
