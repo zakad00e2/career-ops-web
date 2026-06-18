@@ -17,20 +17,32 @@ export function formatDate(date: Date | string): string {
   return d.toISOString().split("T")[0]
 }
 
+export function formatDateLong(date: Date | string | null | undefined): string {
+  if (!date) return "—"
+  const d = typeof date === "string" ? new Date(date) : date
+  if (Number.isNaN(d.getTime())) return "—"
+  return d.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  })
+}
+
 export function scoreColor(score: number | null): string {
   if (!score) return "text-muted-foreground"
-  if (score >= 4.5) return "text-chart-2"
-  if (score >= 4.0) return "text-chart-1"
-  if (score >= 3.5) return "text-chart-3"
+  if (score >= 4.5) return "text-emerald-600"
+  if (score >= 4.0) return "text-blue-600"
+  if (score >= 3.5) return "text-amber-600"
   return "text-destructive"
 }
 
 export function scoreBg(score: number | null): string {
   if (!score) return "bg-muted"
-  if (score >= 4.5) return "bg-chart-2/15"
-  if (score >= 4.0) return "bg-chart-1/15"
-  if (score >= 3.5) return "bg-chart-3/15"
-  return "bg-destructive/15"
+  if (score >= 4.5) return "bg-emerald-600/10"
+  if (score >= 4.0) return "bg-blue-600/10"
+  if (score >= 3.5) return "bg-amber-600/10"
+  return "bg-destructive/10"
 }
 
 export function statusBadgeVariant(status: string): "default" | "secondary" | "destructive" | "outline" {

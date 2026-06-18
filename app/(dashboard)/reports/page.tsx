@@ -7,12 +7,22 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { db, reports } from '@/lib/db';
 import { DEMO_MODE, mockReports } from '@/lib/mock-data';
-import { cn, scoreBg, scoreColor } from '@/lib/utils';
+import { cn, scoreColor } from '@/lib/utils';
 
 function legitimacyVariant(legitimacy: string | null) {
   if (legitimacy === 'High Confidence') return 'secondary';
   if (legitimacy === 'Suspicious') return 'destructive';
   return 'outline';
+}
+
+function snippet(content: string): string {
+  return content
+    .replace(/^#.*$/gm, '')
+    .replace(/\*\*/g, '')
+    .replace(/[|>#-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 120);
 }
 
 export default async function ReportsPage() {
@@ -34,45 +44,52 @@ export default async function ReportsPage() {
           </CardContent>
         </Card>
       ) : (
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {allReports.map(report => (
-            <Link key={report.id} href={`/reports/${report.id}`}>
-              <Card className="h-full cursor-pointer py-0 transition-colors hover:bg-muted/40">
-                <CardContent className="px-4 py-3">
-                  <div className="mb-3 flex items-start justify-between">
-                    <div className="min-w-0 flex-1">
-                      <p className="truncate font-semibold text-foreground transition-colors group-hover:text-primary">
-                        {report.company}
-                      </p>
-                      <p className="truncate text-sm text-muted-foreground">{report.role}</p>
-                    </div>
-                    {report.score && (
-                      <span className={cn('ml-2 shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold', scoreBg(report.score), scoreColor(report.score))}>
-                        {report.score.toFixed(1)}
-                      </span>
-                    )}
-                  </div>
+        <Card className="overflow-hidden py-0">
+          <div className="hidden items-center gap-4 border-b border-border/60 bg-muted/30 px-4 py-2.5 text-[11px] font-medium uppercase tracking-wide text-muted-foreground sm:flex">
+            <span className="w-12 shrink-0 text-center">Score</span>
+            <span className="flex-1">Company / Role</span>
+            <span className="shrink-0">Legitimacy · Date</span>
+          </div>
 
-                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                    <span className="flex items-center gap-1">
-                      <Calendar />
-                      {report.date}
-                    </span>
-                    {report.legitimacy && (
-                      <Badge variant={legitimacyVariant(report.legitimacy)} className="text-xs">
-                        {report.legitimacy}
-                      </Badge>
-                    )}
-                  </div>
+          <div className="divide-y divide-border/60">
+            {allReports.map(report => (
+              <Link
+                key={report.id}
+                href={`/reports/${report.id}`}
+                className="flex items-center gap-4 px-4 py-3 transition-colors hover:bg-muted/50"
+              >
+                <div
+                  className={cn(
+                    'flex size-12 shrink-0 items-center justify-center rounded-full border-2 border-current text-sm font-bold tabular-nums',
+                    scoreColor(report.score),
+                  )}
+                >
+                  {report.score ? report.score.toFixed(1) : '—'}
+                </div>
 
-                  <p className="mt-2 line-clamp-2 text-xs text-muted-foreground">
-                    {report.content.slice(0, 100)}...
+                <div className="min-w-0 flex-1">
+                  <p className="truncate font-semibold text-foreground">{report.company}</p>
+                  <p className="truncate text-sm text-muted-foreground">{report.role}</p>
+                  <p className="mt-0.5 hidden truncate text-xs text-muted-foreground/80 sm:block">
+                    {snippet(report.content)}
                   </p>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
-        </div>
+                </div>
+
+                <div className="flex shrink-0 flex-col items-end gap-1.5">
+                  {report.legitimacy && (
+                    <Badge variant={legitimacyVariant(report.legitimacy)} className="text-xs">
+                      {report.legitimacy}
+                    </Badge>
+                  )}
+                  <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                    <Calendar className="size-3" />
+                    {report.date}
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </Card>
       )}
     </div>
   );
