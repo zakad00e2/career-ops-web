@@ -18,11 +18,11 @@ type Delta = { lead: string; suffix?: string; tone: Tone } | null;
 function monthDelta(current: number, previous: number): Delta {
   if (current === 0 && previous === 0) return null;
   if (previous === 0) {
-    return { lead: '+100%', suffix: 'vs last month', tone: 'up' };
+    return { lead: '+100%', suffix: 'مقارنة بالشهر الماضي', tone: 'up' };
   }
   const pct = Math.round(((current - previous) / previous) * 100);
-  if (pct === 0) return { lead: '0%', suffix: 'vs last month', tone: 'neutral' };
-  return { lead: `${pct > 0 ? '+' : ''}${pct}%`, suffix: 'vs last month', tone: pct > 0 ? 'up' : 'down' };
+  if (pct === 0) return { lead: '0%', suffix: 'مقارنة بالشهر الماضي', tone: 'neutral' };
+  return { lead: `${pct > 0 ? '+' : ''}${pct}%`, suffix: 'مقارنة بالشهر الماضي', tone: pct > 0 ? 'up' : 'down' };
 }
 
 function computeDeltas(apps: Application[], pendingPipeline: { addedAt: Date | null }[]) {
@@ -122,10 +122,10 @@ export default async function DashboardPage() {
   const stats = await getStats();
 
   const statCards = [
-    { label: 'Total Evaluated', value: stats.total, delta: stats.deltas.total },
-    { label: 'Applied', value: stats.applied, delta: stats.deltas.applied },
-    { label: 'Interviews', value: stats.interviews, delta: stats.deltas.interviews },
-    { label: 'Pipeline Pending', value: stats.pendingPipeline, delta: stats.deltas.pipeline },
+    { label: 'إجمالي المُقيَّمة', value: stats.total, delta: stats.deltas.total },
+    { label: 'تم التقديم', value: stats.applied, delta: stats.deltas.applied },
+    { label: 'المقابلات', value: stats.interviews, delta: stats.deltas.interviews },
+    { label: 'قيد الانتظار', value: stats.pendingPipeline, delta: stats.deltas.pipeline },
   ];
 
   const toneClass: Record<Tone, string> = {
@@ -137,8 +137,8 @@ export default async function DashboardPage() {
   return (
     <div className="flex flex-col gap-8">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-foreground">Dashboard</h1>
-        <p className="mt-1 text-sm text-muted-foreground">Your job search pipeline at a glance</p>
+        <h1 className="text-2xl font-semibold tracking-tight text-foreground">لوحة التحكم</h1>
+        <p className="mt-1 text-sm text-muted-foreground">نظرة سريعة على مسار بحثك عن عمل</p>
       </div>
 
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
@@ -150,10 +150,10 @@ export default async function DashboardPage() {
               {delta ? (
                 <p className="text-xs text-muted-foreground">
                   <span className={cn('font-semibold', toneClass[delta.tone])}>{delta.lead}</span>
-                  {delta.suffix ? <span className="ml-1 text-[10px]">{delta.suffix}</span> : null}
+                  {delta.suffix ? <span className="ms-1 text-[10px]">{delta.suffix}</span> : null}
                 </p>
               ) : (
-                <p className="text-[10px] text-muted-foreground">No change yet</p>
+                <p className="text-[10px] text-muted-foreground">لا تغيير بعد</p>
               )}
             </CardContent>
           </Card>
@@ -166,31 +166,31 @@ export default async function DashboardPage() {
         <Card className="rounded-2xl border border-border/60 bg-card shadow-sm">
           <CardHeader className="flex flex-row items-start justify-between gap-3 pb-4">
             <div className="flex flex-col gap-2">
-              <p className="text-sm font-medium text-muted-foreground">Recent Applications</p>
+              <p className="text-sm font-medium text-muted-foreground">أحدث الطلبات</p>
               <div className="flex items-baseline gap-2">
                 <span className="text-3xl font-bold tracking-tight tabular-nums text-foreground">
                   {stats.recentApps.length}
                 </span>
-                <span className="text-xs text-muted-foreground">in your pipeline</span>
+                <span className="text-xs text-muted-foreground">في مسارك</span>
               </div>
             </div>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-background px-3 py-1 text-xs font-medium text-muted-foreground">
               <Clock className="size-3.5" />
-              Latest
+              الأحدث
             </span>
           </CardHeader>
           <CardContent className="px-0 pb-0">
             {stats.recentApps.length === 0 ? (
-              <p className="px-6 py-6 text-center text-sm text-muted-foreground">No applications yet</p>
+              <p className="px-6 py-6 text-center text-sm text-muted-foreground">لا توجد طلبات بعد</p>
             ) : (
               <div className="overflow-x-auto">
-                <table className="w-full border-collapse text-left">
+                <table className="w-full border-collapse text-start">
                   <thead>
                     <tr className="border-y border-border/60 bg-muted/40">
-                      <th className="px-6 py-2.5 text-xs font-medium text-muted-foreground">Company</th>
-                      <th className="px-3 py-2.5 text-xs font-medium text-muted-foreground">Score</th>
-                      <th className="px-3 py-2.5 text-xs font-medium text-muted-foreground">Date</th>
-                      <th className="px-6 py-2.5 text-right text-xs font-medium text-muted-foreground">Status</th>
+                      <th className="px-6 py-2.5 text-xs font-medium text-muted-foreground">الشركة</th>
+                      <th className="px-3 py-2.5 text-xs font-medium text-muted-foreground">التقييم</th>
+                      <th className="px-3 py-2.5 text-xs font-medium text-muted-foreground">التاريخ</th>
+                      <th className="px-6 py-2.5 text-end text-xs font-medium text-muted-foreground">الحالة</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -227,7 +227,7 @@ export default async function DashboardPage() {
                           <td className="px-3 py-3.5">
                             <span className="whitespace-nowrap text-xs text-muted-foreground">{formatDateLong(app.date)}</span>
                           </td>
-                          <td className="px-6 py-3.5 text-right">
+                          <td className="px-6 py-3.5 text-end">
                             <StatusBadge status={app.status} />
                           </td>
                         </tr>
@@ -244,10 +244,10 @@ export default async function DashboardPage() {
 
       <div className="flex flex-wrap gap-3">
         <Link href="/evaluate">
-          <Button>Evaluate a Job</Button>
+          <Button>قيّم وظيفة</Button>
         </Link>
         <Link href="/pipeline">
-          <Button variant="secondary">View Pipeline ({stats.pendingPipeline})</Button>
+          <Button variant="secondary">عرض القائمة ({stats.pendingPipeline})</Button>
         </Link>
       </div>
     </div>
