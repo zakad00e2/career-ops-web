@@ -22,7 +22,6 @@ import {
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
@@ -33,8 +32,8 @@ gsap.registerPlugin(useGSAP);
 
 const primaryNav = [
   { href: '/', label: 'لوحة التحكم', icon: LayoutDashboard },
-  { href: '/applications', label: 'الطلبات', icon: Briefcase, badge: '10' },
-  { href: '/pipeline', label: 'قائمة الانتظار', icon: GitBranch, badge: '3' },
+  { href: '/applications', label: 'الطلبات', icon: Briefcase },
+  { href: '/pipeline', label: 'قائمة الانتظار', icon: GitBranch },
   { href: '/reports', label: 'التقارير', icon: FileText },
 ];
 
@@ -108,7 +107,7 @@ export function Sidebar() {
           <SidebarGroupLabel>مساحة العمل</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {primaryNav.map(({ href, label, icon: Icon, badge }) => {
+              {primaryNav.map(({ href, label, icon: Icon }) => {
                 const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href);
 
                 return (
@@ -117,7 +116,6 @@ export function Sidebar() {
                       <Icon />
                       <span>{label}</span>
                     </SidebarMenuButton>
-                    {badge && <SidebarMenuBadge>{badge}</SidebarMenuBadge>}
                   </SidebarMenuItem>
                 );
               })}
