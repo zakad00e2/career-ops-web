@@ -71,8 +71,8 @@ export function SettingsClient() {
     <div className="flex max-w-4xl flex-col gap-6">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-foreground">Settings</h1>
-          <p className="mt-1 text-sm text-muted-foreground">Your profile, CV, and personalization</p>
+          <h1 className="text-2xl font-semibold tracking-tight text-foreground">الإعدادات</h1>
+          <p className="mt-1 text-sm text-muted-foreground">ملفك الشخصي وسيرتك الذاتية والتخصيص</p>
         </div>
         <Button variant={saved ? 'secondary' : 'default'} onClick={handleSave} disabled={saving}>
           {saving ? (
@@ -82,7 +82,7 @@ export function SettingsClient() {
           ) : (
             <Save />
           )}
-          {saved ? 'Saved' : 'Save Changes'}
+          {saved ? 'تم الحفظ' : 'حفظ التغييرات'}
         </Button>
       </div>
 
@@ -90,51 +90,51 @@ export function SettingsClient() {
         <TabsList>
           <TabsTrigger value="profile">
             <User />
-            Profile
+            الملف الشخصي
           </TabsTrigger>
           <TabsTrigger value="cv">
             <FileText />
-            CV
+            السيرة الذاتية
           </TabsTrigger>
           <TabsTrigger value="advanced">
             <Settings />
-            Advanced
+            متقدم
           </TabsTrigger>
         </TabsList>
 
         <TabsContent value="profile" className="mt-4 flex flex-col gap-4">
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">Personal Info</CardTitle>
+              <CardTitle className="text-base">المعلومات الشخصية</CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col gap-4">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <Field label="Full Name">
+                <Field label="الاسم الكامل">
                   <Input
                     value={profile.name || ''}
                     onChange={e => update('name', e.target.value)}
-                    placeholder="Your name"
+                    placeholder="اسمك"
                   />
                 </Field>
-                <Field label="Email">
+                <Field label="البريد الإلكتروني">
                   <Input
                     value={profile.email || ''}
                     onChange={e => update('email', e.target.value)}
                     placeholder="your@email.com"
                   />
                 </Field>
-                <Field label="Location">
+                <Field label="الموقع">
                   <Input
                     value={profile.location || ''}
                     onChange={e => update('location', e.target.value)}
-                    placeholder="City, Country"
+                    placeholder="المدينة، الدولة"
                   />
                 </Field>
-                <Field label="Remote Policy">
+                <Field label="سياسة العمل عن بُعد">
                   <Input
                     value={profile.remotePolicy || ''}
                     onChange={e => update('remotePolicy', e.target.value)}
-                    placeholder="Full remote / Hybrid / On-site"
+                    placeholder="عن بُعد كليًا / هجين / من المكتب"
                   />
                 </Field>
               </div>
@@ -143,32 +143,32 @@ export function SettingsClient() {
 
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">Target Role & Compensation</CardTitle>
+              <CardTitle className="text-base">الدور المستهدف والراتب</CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col gap-4">
-              <Field label="Target Role(s)">
+              <Field label="الدور (الأدوار) المستهدفة">
                 <Input
                   value={profile.targetRole || ''}
                   onChange={e => update('targetRole', e.target.value)}
-                  placeholder="e.g. Senior AI Engineer, ML Platform Lead"
+                  placeholder="مثال: مهندس ذكاء اصطناعي أول، قائد منصة تعلم آلي"
                 />
               </Field>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                <Field label="Salary Min">
+                <Field label="أدنى راتب">
                   <Input
                     value={profile.salaryMin || ''}
                     onChange={e => update('salaryMin', e.target.value)}
                     placeholder="120,000"
                   />
                 </Field>
-                <Field label="Salary Max">
+                <Field label="أعلى راتب">
                   <Input
                     value={profile.salaryMax || ''}
                     onChange={e => update('salaryMax', e.target.value)}
                     placeholder="180,000"
                   />
                 </Field>
-                <Field label="Currency / Note">
+                <Field label="العملة / ملاحظة">
                   <Input
                     value={profile.salaryNote || ''}
                     onChange={e => update('salaryNote', e.target.value)}
@@ -183,10 +183,10 @@ export function SettingsClient() {
         <TabsContent value="cv" className="mt-4 flex flex-col gap-4">
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">Your CV (Markdown)</CardTitle>
+              <CardTitle className="text-base">سيرتك الذاتية (Markdown)</CardTitle>
               <p className="text-xs text-muted-foreground">
-                This is the source of truth for evaluations and PDF generation.
-                Keep it in clean markdown with Summary, Experience, Projects, Education, and Skills.
+                هذا هو المصدر المرجعي للتقييمات وتوليد PDF.
+                احتفظ به بصيغة markdown نظيفة مع الأقسام: Summary وExperience وProjects وEducation وSkills.
               </p>
             </CardHeader>
             <CardContent>
@@ -203,9 +203,9 @@ export function SettingsClient() {
         <TabsContent value="advanced" className="mt-4 flex flex-col gap-4">
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">_profile.md Customization</CardTitle>
+              <CardTitle className="text-base">تخصيص _profile.md</CardTitle>
               <p className="text-xs text-muted-foreground">
-                Override archetypes, negotiation scripts, and framing. This maps to{' '}
+                تجاوز النماذج الأصلية ونصوص التفاوض والصياغة. يقابل هذا الملف{' '}
                 <code className="rounded bg-muted px-1 text-primary">modes/_profile.md</code>.
               </p>
             </CardHeader>
@@ -221,9 +221,9 @@ export function SettingsClient() {
 
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">profile.yml Config</CardTitle>
+              <CardTitle className="text-base">إعدادات profile.yml</CardTitle>
               <p className="text-xs text-muted-foreground">
-                Raw YAML config passed to evaluations. Maps to{' '}
+                إعدادات YAML الخام المُمرَّرة للتقييمات. تقابل{' '}
                 <code className="rounded bg-muted px-1 text-primary">config/profile.yml</code>.
               </p>
             </CardHeader>
@@ -239,10 +239,10 @@ export function SettingsClient() {
 
           <Alert>
             <AlertDescription>
-              <strong>Environment variables required:</strong> Make sure{' '}
-              <code className="rounded bg-muted px-1">ANTHROPIC_API_KEY</code> and{' '}
-              <code className="rounded bg-muted px-1">DATABASE_URL</code> are set in{' '}
-              <code className="rounded bg-muted px-1">.env.local</code> before using evaluations and PDF generation.
+              <strong>متغيرات البيئة المطلوبة:</strong> تأكد من ضبط{' '}
+              <code className="rounded bg-muted px-1">ANTHROPIC_API_KEY</code> و{' '}
+              <code className="rounded bg-muted px-1">DATABASE_URL</code> في{' '}
+              <code className="rounded bg-muted px-1">.env.local</code> قبل استخدام التقييمات وتوليد PDF.
             </AlertDescription>
           </Alert>
         </TabsContent>
