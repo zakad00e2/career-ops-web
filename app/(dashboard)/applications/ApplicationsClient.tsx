@@ -17,7 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { CANONICAL_STATUSES, cn, scoreBg, scoreColor } from '@/lib/utils';
+import { CANONICAL_STATUSES, cn, scoreBg, scoreColor, statusLabel } from '@/lib/utils';
 
 interface Application {
   id: number;
@@ -94,7 +94,7 @@ export function ApplicationsClient() {
   }
 
   async function deleteApp(id: number) {
-    if (!confirm('Delete this application?')) return;
+    if (!confirm('هل تريد حذف هذا الطلب؟')) return;
     await fetch(`/api/applications/${id}`, { method: 'DELETE' });
     setApps(prev => prev.filter(a => a.id !== id));
   }
@@ -118,33 +118,33 @@ export function ApplicationsClient() {
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-foreground">Applications</h1>
-          <p className="mt-1 text-sm text-muted-foreground">{apps.length} total · {filtered.length} shown</p>
+          <h1 className="text-2xl font-semibold tracking-tight text-foreground">الطلبات</h1>
+          <p className="mt-1 text-sm text-muted-foreground">{apps.length} إجمالاً · {filtered.length} ظاهرة</p>
         </div>
         <Button variant="outline" size="sm" onClick={load} disabled={loading}>
           <RefreshCw className={cn(loading && 'animate-spin')} />
-          Refresh
+          تحديث
         </Button>
       </div>
 
       <div className="flex flex-wrap gap-3">
         <div className="relative min-w-[220px] flex-1">
-          <Search className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+          <Search className="pointer-events-none absolute start-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
           <Input
-            placeholder="Search company, role, notes..."
-            className="pl-9"
+            placeholder="ابحث في الشركة أو الدور أو الملاحظات..."
+            className="ps-9"
             value={search}
             onChange={e => setSearch(e.target.value)}
           />
         </div>
         <Select value={statusFilter} onValueChange={(v) => setStatusFilter(v ?? 'all')}>
           <SelectTrigger className="w-44">
-            <SelectValue placeholder="Status" />
+            <SelectValue placeholder="الحالة" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All statuses</SelectItem>
+            <SelectItem value="all">كل الحالات</SelectItem>
             {CANONICAL_STATUSES.map(s => (
-              <SelectItem key={s} value={s}>{s}</SelectItem>
+              <SelectItem key={s} value={s}>{statusLabel(s)}</SelectItem>
             ))}
           </SelectContent>
         </Select>
@@ -155,12 +155,12 @@ export function ApplicationsClient() {
           <TableHeader>
             <TableRow>
               <TableHead className="w-12">#</TableHead>
-              <TableHead>{sortableHead('company', 'Company')}</TableHead>
-              <TableHead>Role</TableHead>
-              <TableHead>{sortableHead('date', 'Date')}</TableHead>
-              <TableHead>{sortableHead('score', 'Score')}</TableHead>
-              <TableHead>{sortableHead('status', 'Status')}</TableHead>
-              <TableHead>Actions</TableHead>
+              <TableHead>{sortableHead('company', 'الشركة')}</TableHead>
+              <TableHead>الدور</TableHead>
+              <TableHead>{sortableHead('date', 'التاريخ')}</TableHead>
+              <TableHead>{sortableHead('score', 'التقييم')}</TableHead>
+              <TableHead>{sortableHead('status', 'الحالة')}</TableHead>
+              <TableHead>إجراءات</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -177,7 +177,7 @@ export function ApplicationsClient() {
             ) : filtered.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={7} className="h-32 text-center text-muted-foreground">
-                  No applications found
+                  لا توجد طلبات
                 </TableCell>
               </TableRow>
             ) : (
@@ -215,14 +215,14 @@ export function ApplicationsClient() {
                   <TableCell>
                     <div className="flex items-center gap-1">
                       {app.reportPath && (
-                        <Link href={app.reportPath ?? '#'} title="View Report">
+                        <Link href={app.reportPath ?? '#'} title="عرض التقرير">
                           <Button size="icon-xs" variant="ghost">
                             <FileText />
                           </Button>
                         </Link>
                       )}
                       {app.url && (
-                        <a href={app.url} target="_blank" rel="noopener noreferrer" title="Open URL">
+                        <a href={app.url} target="_blank" rel="noopener noreferrer" title="فتح الرابط">
                           <Button size="icon-xs" variant="ghost">
                             <ExternalLink />
                           </Button>
