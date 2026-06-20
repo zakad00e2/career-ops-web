@@ -64,7 +64,7 @@ export function EvaluateClient({ initialUrl = '' }: { initialUrl?: string }) {
       const profileContent = profile.profileMd || '';
 
       if (!cvContent) {
-        setError('No CV found. Please add your CV in Settings first.');
+        setError('لا توجد سيرة ذاتية. الرجاء إضافة سيرتك من الإعدادات أولاً.');
         setStatus('error');
         return;
       }
@@ -88,7 +88,7 @@ export function EvaluateClient({ initialUrl = '' }: { initialUrl?: string }) {
 
       if (!res.ok) {
         const err = await res.json();
-        throw new Error(err.error || 'Evaluation failed');
+        throw new Error(err.error || 'فشل التقييم');
       }
 
       const reader = res.body!.getReader();
@@ -115,7 +115,7 @@ export function EvaluateClient({ initialUrl = '' }: { initialUrl?: string }) {
         setStatus('idle');
         return;
       }
-      setError(err instanceof Error ? err.message : 'Unknown error');
+      setError(err instanceof Error ? err.message : 'خطأ غير معروف');
       setStatus('error');
     }
   }
@@ -171,7 +171,7 @@ export function EvaluateClient({ initialUrl = '' }: { initialUrl?: string }) {
 
       if (!res.ok) {
         const detail = await res.json().catch(() => ({}));
-        throw new Error(detail.error || 'Failed to generate CV');
+        throw new Error(detail.error || 'فشل توليد السيرة الذاتية');
       }
 
       // The route returns a print-ready HTML document. Open it in a new tab so
@@ -207,18 +207,18 @@ export function EvaluateClient({ initialUrl = '' }: { initialUrl?: string }) {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-foreground">Evaluate a Job</h1>
-        <p className="mt-1 text-sm text-muted-foreground">Paste a job URL or description to get a full A-G evaluation</p>
+        <h1 className="text-2xl font-semibold tracking-tight text-foreground">قيّم وظيفة</h1>
+        <p className="mt-1 text-sm text-muted-foreground">الصق رابط وظيفة أو وصفها للحصول على تقييم كامل من A إلى G</p>
       </div>
 
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
         <Card>
           <CardHeader className="pb-3">
-            <CardTitle className="text-base">Job Posting</CardTitle>
+            <CardTitle className="text-base">إعلان الوظيفة</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col gap-4">
             <Textarea
-              placeholder="Paste the job URL or full job description here..."
+              placeholder="الصق رابط الوظيفة أو وصفها الكامل هنا..."
               className="min-h-[300px] resize-none bg-background font-mono text-sm"
               value={input}
               onChange={e => setInput(e.target.value)}
@@ -229,12 +229,12 @@ export function EvaluateClient({ initialUrl = '' }: { initialUrl?: string }) {
               {status === 'streaming' || status === 'fetching' ? (
                 <Button variant="destructive" onClick={handleStop} className="flex-1">
                   <Loader2 className="animate-spin" />
-                  {status === 'fetching' ? 'Fetching job...' : 'Stop Evaluation'}
+                  {status === 'fetching' ? 'جارٍ جلب الوظيفة...' : 'إيقاف التقييم'}
                 </Button>
               ) : (
                 <Button className="flex-1" onClick={handleEvaluate} disabled={!input.trim()}>
                   <Zap />
-                  Evaluate
+                  تقييم
                 </Button>
               )}
             </div>
@@ -251,7 +251,7 @@ export function EvaluateClient({ initialUrl = '' }: { initialUrl?: string }) {
         <Card>
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between gap-3">
-              <CardTitle className="text-base">Evaluation Report</CardTitle>
+              <CardTitle className="text-base">تقرير التقييم</CardTitle>
               <div className="flex items-center gap-2">
                 {score && (
                   <span className={cn('rounded-full px-3 py-1 text-sm font-semibold', scoreBg(score), scoreColor(score))}>
@@ -260,11 +260,11 @@ export function EvaluateClient({ initialUrl = '' }: { initialUrl?: string }) {
                 )}
                 {status === 'streaming' && (
                   <Badge variant="secondary" className="animate-pulse">
-                    Streaming...
+                    جارٍ البث...
                   </Badge>
                 )}
                 {status === 'done' && output && (
-                  <Badge variant="outline">Done</Badge>
+                  <Badge variant="outline">تم</Badge>
                 )}
               </div>
             </div>
@@ -277,10 +277,10 @@ export function EvaluateClient({ initialUrl = '' }: { initialUrl?: string }) {
               {output || (
                 <span className="text-muted-foreground">
                   {status === 'idle'
-                    ? 'Evaluation output will appear here...'
+                    ? 'سيظهر ناتج التقييم هنا...'
                     : status === 'fetching'
-                      ? 'Fetching job posting...'
-                      : 'Starting evaluation...'}
+                      ? 'جارٍ جلب إعلان الوظيفة...'
+                      : 'جارٍ بدء التقييم...'}
                 </span>
               )}
             </div>
@@ -291,7 +291,7 @@ export function EvaluateClient({ initialUrl = '' }: { initialUrl?: string }) {
                 <div className="flex flex-wrap gap-2">
                   <Button size="sm" variant="outline" onClick={handleCopy}>
                     {copied ? <Check /> : <Copy />}
-                    {copied ? 'Copied' : 'Copy'}
+                    {copied ? 'تم النسخ' : 'نسخ'}
                   </Button>
 
                   <Button
@@ -302,12 +302,12 @@ export function EvaluateClient({ initialUrl = '' }: { initialUrl?: string }) {
                     disabled={saved}
                   >
                     <Save />
-                    {saved ? 'Saved' : 'Save to Tracker'}
+                    {saved ? 'تم الحفظ' : 'حفظ في المتتبّع'}
                   </Button>
 
                   <Button size="sm" variant="outline" onClick={handleDownloadPdf} disabled={downloadingPdf}>
                     {downloadingPdf ? <Loader2 className="animate-spin" /> : <FileDown />}
-                    {downloadingPdf ? 'Preparing CV...' : 'Print / Save CV PDF'}
+                    {downloadingPdf ? 'جارٍ تجهيز السيرة...' : 'طباعة / حفظ السيرة PDF'}
                   </Button>
                 </div>
 
@@ -315,7 +315,7 @@ export function EvaluateClient({ initialUrl = '' }: { initialUrl?: string }) {
                   <Alert>
                     <AlertTriangle />
                     <AlertDescription>
-                      Score below 4.0 - career-ops recommends against applying to this role.
+                      التقييم أقل من 4.0 - يوصي career-ops بعدم التقديم على هذا الدور.
                     </AlertDescription>
                   </Alert>
                 )}
