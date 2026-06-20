@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { db, reports } from '@/lib/db';
 import { DEMO_MODE, mockReports } from '@/lib/mock-data';
-import { cn, scoreColor } from '@/lib/utils';
+import { cn, scoreColor, legitimacyLabel } from '@/lib/utils';
 
 function legitimacyVariant(legitimacy: string | null) {
   if (legitimacy === 'High Confidence') return 'secondary';
@@ -33,22 +33,22 @@ export default async function ReportsPage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-foreground">Reports</h1>
-        <p className="mt-1 text-sm text-muted-foreground">{allReports.length} evaluation reports</p>
+        <h1 className="text-2xl font-semibold tracking-tight text-foreground">التقارير</h1>
+        <p className="mt-1 text-sm text-muted-foreground">{allReports.length} تقرير تقييم</p>
       </div>
 
       {allReports.length === 0 ? (
         <Card>
           <CardContent className="py-12 text-center text-muted-foreground">
-            No reports yet - evaluate a job to generate one
+            لا توجد تقارير بعد - قيّم وظيفة لإنشاء واحد
           </CardContent>
         </Card>
       ) : (
         <Card className="overflow-hidden py-0">
           <div className="hidden items-center gap-4 border-b border-border/60 bg-muted/30 px-4 py-2.5 text-[11px] font-medium uppercase tracking-wide text-muted-foreground sm:flex">
-            <span className="w-12 shrink-0 text-center">Score</span>
-            <span className="flex-1">Company / Role</span>
-            <span className="shrink-0">Legitimacy · Date</span>
+            <span className="w-12 shrink-0 text-center">التقييم</span>
+            <span className="flex-1">الشركة / الدور</span>
+            <span className="shrink-0">المصداقية · التاريخ</span>
           </div>
 
           <div className="divide-y divide-border/60">
@@ -78,7 +78,7 @@ export default async function ReportsPage() {
                 <div className="flex shrink-0 flex-col items-end gap-1.5">
                   {report.legitimacy && (
                     <Badge variant={legitimacyVariant(report.legitimacy)} className="text-xs">
-                      {report.legitimacy}
+                      {legitimacyLabel(report.legitimacy)}
                     </Badge>
                   )}
                   <span className="flex items-center gap-1 text-xs text-muted-foreground">

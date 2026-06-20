@@ -2,12 +2,12 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Calendar, Check, Copy, ExternalLink, FileDown } from 'lucide-react';
+import { ArrowRight, Calendar, Check, Copy, ExternalLink, FileDown } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { cn, scoreBg, scoreColor } from '@/lib/utils';
+import { cn, scoreBg, scoreColor, legitimacyLabel } from '@/lib/utils';
 
 interface Report {
   id: number;
@@ -86,8 +86,8 @@ export function ReportViewer({ report }: { report: Report }) {
       <div>
         <Link href="/reports">
           <Button variant="ghost" size="sm">
-            <ArrowLeft />
-            Reports
+            <ArrowRight />
+            التقارير
           </Button>
         </Link>
       </div>
@@ -111,7 +111,7 @@ export function ReportViewer({ report }: { report: Report }) {
                     className="flex items-center gap-1.5 transition-colors hover:text-primary"
                   >
                     <ExternalLink />
-                    View posting
+                    عرض الإعلان
                   </a>
                 )}
               </div>
@@ -125,7 +125,7 @@ export function ReportViewer({ report }: { report: Report }) {
               )}
               {report.legitimacy && (
                 <Badge variant={legitimacyVariant(report.legitimacy)} className="text-xs">
-                  {report.legitimacy}
+                  {legitimacyLabel(report.legitimacy)}
                 </Badge>
               )}
             </div>
@@ -136,11 +136,11 @@ export function ReportViewer({ report }: { report: Report }) {
           <div className="flex flex-wrap gap-2">
             <Button variant="outline" size="sm" onClick={handleCopy}>
               {copied ? <Check /> : <Copy />}
-              {copied ? 'Copied' : 'Copy Report'}
+              {copied ? 'تم النسخ' : 'نسخ التقرير'}
             </Button>
             <Button variant="outline" size="sm" onClick={handleDownloadPdf} disabled={downloading}>
               <FileDown />
-              {downloading ? 'Generating...' : 'Download CV PDF'}
+              {downloading ? 'جارٍ التوليد...' : 'تنزيل السيرة PDF'}
             </Button>
           </div>
         </CardContent>
