@@ -33,7 +33,7 @@ export default async function ReportsPage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-foreground">التقارير</h1>
+        <h1 className="text-2xl font-medium tracking-tight text-foreground">التقارير</h1>
         <p className="mt-1 text-sm text-muted-foreground">{allReports.length} تقرير تقييم</p>
       </div>
 
@@ -60,7 +60,7 @@ export default async function ReportsPage() {
               >
                 <div
                   className={cn(
-                    'flex size-12 shrink-0 items-center justify-center rounded-full border-2 border-current text-sm font-bold tabular-nums',
+                    'flex size-12 shrink-0 items-center justify-center rounded-full border-2 border-current text-sm font-medium tabular-nums',
                     scoreColor(report.score),
                   )}
                 >
@@ -68,7 +68,7 @@ export default async function ReportsPage() {
                 </div>
 
                 <div className="min-w-0 flex-1">
-                  <p className="truncate font-semibold text-foreground">{report.company}</p>
+                  <p className="truncate font-medium text-foreground">{report.company}</p>
                   <p className="truncate text-sm text-muted-foreground">{report.role}</p>
                   <p className="mt-0.5 hidden truncate text-xs text-muted-foreground/80 sm:block">
                     {snippet(report.content)}

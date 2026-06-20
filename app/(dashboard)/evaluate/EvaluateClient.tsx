@@ -13,9 +13,10 @@ import { cn, scoreBg, scoreColor } from '@/lib/utils';
 type Status = 'idle' | 'fetching' | 'streaming' | 'done' | 'error';
 
 function parseScore(text: string): number | null {
-  // Report header is "**Score:** 4.8/5" — the character class after the label
-  // tolerates the markdown bold (**) and whitespace between "Score:" and the number.
-  const m = text.match(/(?:Global\s+)?Score[:*\s]*([0-9](?:\.[0-9]+)?)\s*\/\s*5/i);
+  // Header is "**Score:** 4.8/5" (EN) or "**التقييم:** 4.8/5" (AR). The label
+  // alternation covers both languages; the char class after it tolerates the
+  // markdown bold (**) and whitespace between the label and the number.
+  const m = text.match(/(?:Global\s+)?(?:Score|التقييم|النتيجة|الدرجة)[:*\s]*([0-9](?:\.[0-9]+)?)\s*\/\s*5/i);
   if (m) return parseFloat(m[1]);
   return null;
 }
@@ -207,19 +208,19 @@ export function EvaluateClient({ initialUrl = '' }: { initialUrl?: string }) {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-foreground">قيّم وظيفة</h1>
-        <p className="mt-1 text-sm text-muted-foreground">الصق رابط وظيفة أو وصفها للحصول على تقييم كامل من A إلى G</p>
+        <h1 className="text-2xl font-medium tracking-tight text-foreground">قيّم وظيفة</h1>
+        <p className="mt-1 text-sm text-muted-foreground">الصق رابط وظيفة أو وصفها للحصول على تقييم كامل من 1 إلى 5</p>
       </div>
 
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
-        <Card>
-          <CardHeader className="pb-3">
+        <Card className="gap-2">
+          <CardHeader className="pb-0">
             <CardTitle className="text-base">إعلان الوظيفة</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col gap-4">
             <Textarea
               placeholder="الصق رابط الوظيفة أو وصفها الكامل هنا..."
-              className="min-h-[300px] resize-none bg-background font-mono text-sm"
+              className="min-h-[300px] resize-none bg-background font-sans text-sm placeholder:font-sans"
               value={input}
               onChange={e => setInput(e.target.value)}
               disabled={status === 'streaming' || status === 'fetching'}
@@ -248,13 +249,13 @@ export function EvaluateClient({ initialUrl = '' }: { initialUrl?: string }) {
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="pb-3">
+        <Card className="gap-2">
+          <CardHeader className="pb-0">
             <div className="flex items-center justify-between gap-3">
               <CardTitle className="text-base">تقرير التقييم</CardTitle>
               <div className="flex items-center gap-2">
                 {score && (
-                  <span className={cn('rounded-full px-3 py-1 text-sm font-semibold', scoreBg(score), scoreColor(score))}>
+                  <span className={cn('rounded-full px-3 py-1 text-sm font-medium', scoreBg(score), scoreColor(score))}>
                     {score.toFixed(1)}/5
                   </span>
                 )}
@@ -272,7 +273,10 @@ export function EvaluateClient({ initialUrl = '' }: { initialUrl?: string }) {
           <CardContent className="flex flex-col gap-3">
             <div
               ref={outputRef}
-              className="h-[300px] overflow-y-auto whitespace-pre-wrap rounded-lg border bg-background p-4 font-mono text-xs text-muted-foreground"
+              className={cn(
+                'h-[300px] overflow-y-auto whitespace-pre-wrap rounded-lg border bg-background p-4 text-xs text-muted-foreground',
+                output ? 'font-mono' : 'font-sans',
+              )}
             >
               {output || (
                 <span className="text-muted-foreground">
@@ -332,7 +336,8 @@ export function EvaluateClient({ initialUrl = '' }: { initialUrl?: string }) {
 // There is no "**Company:**"/"**Role:**" field, so we parse the H1 line. The dash
 // must be surrounded by whitespace so intra-word hyphens (e.g. "Front-End") don't split.
 function parseCompanyRole(text: string): { company: string; role: string } {
-  const m = text.match(/^#\s*Evaluation:\s*(.+?)\s+[—–-]\s+(.+?)\s*$/im);
+  // H1 is "# Evaluation: Company — Role" (EN) or "# تقييم: Company — Role" (AR).
+  const m = text.match(/^#\s*(?:Evaluation|تقييم)\s*[:：]?\s*(.+?)\s+[—–-]\s+(.+?)\s*$/im);
   if (m) return { company: m[1].trim(), role: m[2].trim() };
   return { company: 'Unknown', role: 'Unknown' };
 }

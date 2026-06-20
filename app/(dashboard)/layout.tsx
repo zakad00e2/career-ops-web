@@ -17,8 +17,8 @@ export default function DashboardLayout({
       <Sidebar />
       <SidebarInset className="min-h-svh bg-background">
         {isDemoMode() && <DemoBanner />}
-        <header className="sticky top-0 z-30 flex h-12 items-center gap-2 border-b bg-background/85 px-4 backdrop-blur-xl">
-          <SidebarTrigger />
+        <header className="sticky top-0 z-30 flex h-12 items-center gap-1 border-b bg-background/85 px-4 backdrop-blur-xl">
+          <SidebarTrigger className="-me-0.5" />
           <div className="min-w-0">
             <p className="truncate text-sm font-medium text-foreground">Career-Ops</p>
             <p className="truncate text-xs text-muted-foreground md:hidden">مسار البحث عن وظيفة بالذكاء الاصطناعي</p>

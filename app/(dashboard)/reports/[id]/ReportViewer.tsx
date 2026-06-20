@@ -35,7 +35,7 @@ function renderMarkdown(text: string): string {
       ).join('') + '</tr>';
     })
     .replace(/^---+$/gm, '<hr class="my-4 border-border" />')
-    .replace(/^- (.+)$/gm, '<li class="ml-4 mb-1 text-sm text-muted-foreground">$1</li>')
+    .replace(/^- (.+)$/gm, '<li class="ms-4 mb-1 text-sm text-muted-foreground">$1</li>')
     .replace(/(<li.*<\/li>\n?)+/g, m => `<ul class="my-2 list-disc">${m}</ul>`)
     .replace(/(<tr>.*<\/tr>\n?)+/g, m => `<table class="my-3 w-full border-collapse">${m}</table>`)
     .replace(/^([^<\n].+)$/gm, '<p class="mb-2 text-sm text-muted-foreground">$1</p>')

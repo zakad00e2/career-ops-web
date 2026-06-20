@@ -2,6 +2,7 @@
 
 import { BarChart, Bar, CartesianGrid, Cell, Pie, PieChart, XAxis, YAxis } from 'recharts';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { GreetingCard } from '@/components/GreetingCard';
 import {
   ChartContainer,
   ChartTooltip,
@@ -53,9 +54,13 @@ const statusChartConfig = {
 export function DashboardCharts({
   scoreDist,
   recentApps,
+  greetingName,
+  activePct,
 }: {
   scoreDist: ScoreDist;
   recentApps: Application[];
+  greetingName: string;
+  activePct: number;
 }) {
   const scoreChartData = [
     {
@@ -94,12 +99,14 @@ export function DashboardCharts({
     : 0;
 
   return (
-    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-      <Card className="flex h-full flex-col rounded-2xl border border-border/60 bg-card pb-3 shadow-sm">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <GreetingCard name={greetingName} activePct={activePct} />
+
+      <Card className="flex h-full flex-col pb-3 shadow-none">
         <CardHeader className="gap-3 pb-2">
-          <CardTitle className="text-sm font-medium text-muted-foreground">توزيع التقييمات</CardTitle>
+          <CardTitle className="text-sm font-normal text-muted-foreground">توزيع التقييمات</CardTitle>
           <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-bold tracking-tight tabular-nums text-foreground">
+            <span className="text-3xl font-medium tracking-tight tabular-nums text-foreground">
               {avgScore > 0 ? avgScore.toFixed(1) : '—'}
             </span>
             <span className="text-xs text-muted-foreground">متوسط التقييم</span>
@@ -165,11 +172,11 @@ export function DashboardCharts({
         </CardContent>
       </Card>
 
-      <Card className="flex h-full flex-col rounded-2xl border border-border/60 bg-card pb-3 shadow-sm">
+      <Card className="flex h-full flex-col pb-3 shadow-none">
         <CardHeader className="gap-3 pb-2">
-          <CardTitle className="text-sm font-medium text-muted-foreground">الطلبات حسب الحالة</CardTitle>
+          <CardTitle className="text-sm font-normal text-muted-foreground">الطلبات حسب الحالة</CardTitle>
           <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-bold tracking-tight tabular-nums text-foreground">
+            <span className="text-3xl font-medium tracking-tight tabular-nums text-foreground">
               {avgPerStatus > 0 ? avgPerStatus.toFixed(1) : '—'}
             </span>
             <span className="text-xs text-muted-foreground">المتوسط لكل حالة</span>
@@ -230,7 +237,7 @@ export function DashboardCharts({
                       />
                     </svg>
                     <div className="absolute inset-x-0 top-0 bottom-1/2 flex flex-col items-center justify-end pb-1">
-                      <span className="text-3xl font-bold tracking-tight tabular-nums text-foreground">{totalApps}</span>
+                      <span className="text-3xl font-medium tracking-tight tabular-nums text-foreground">{totalApps}</span>
                       <span className="text-xs text-muted-foreground">الإجمالي</span>
                     </div>
                   </div>

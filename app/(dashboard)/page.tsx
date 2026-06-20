@@ -137,7 +137,7 @@ export default async function DashboardPage() {
   return (
     <div className="flex flex-col gap-8">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-foreground">لوحة التحكم</h1>
+        <h1 className="text-2xl font-medium tracking-tight text-foreground">لوحة التحكم</h1>
         <p className="mt-1 text-sm text-muted-foreground">نظرة سريعة على مسار بحثك عن عمل</p>
       </div>
 
@@ -146,10 +146,10 @@ export default async function DashboardPage() {
           <Card key={label} size="sm" className="flex flex-col py-3">
             <CardContent className="flex flex-col gap-2 py-0">
               <p className="text-xs font-medium text-foreground">{label}</p>
-              <p className="text-3xl font-bold tracking-tight tabular-nums text-foreground">{value}</p>
+              <p className="text-3xl font-medium tracking-tight tabular-nums text-foreground">{value}</p>
               {delta ? (
                 <p className="text-xs text-muted-foreground">
-                  <span className={cn('font-semibold', toneClass[delta.tone])}>{delta.lead}</span>
+                  <bdi dir="ltr" className={cn('font-medium', toneClass[delta.tone])}>{delta.lead}</bdi>
                   {delta.suffix ? <span className="ms-1 text-[10px]">{delta.suffix}</span> : null}
                 </p>
               ) : (
@@ -160,15 +160,20 @@ export default async function DashboardPage() {
         ))}
       </div>
 
-      <DashboardCharts scoreDist={stats.scoreDist} recentApps={stats.recentApps} />
+      <DashboardCharts
+        scoreDist={stats.scoreDist}
+        recentApps={stats.recentApps}
+        greetingName="حمود"
+        activePct={stats.total > 0 ? (stats.applied / stats.total) * 100 : 0}
+      />
 
       <div className="grid grid-cols-1 items-start gap-6">
-        <Card className="rounded-2xl border border-border/60 bg-card shadow-sm">
+        <Card className="shadow-none">
           <CardHeader className="flex flex-row items-start justify-between gap-3 pb-4">
             <div className="flex flex-col gap-2">
-              <p className="text-sm font-medium text-muted-foreground">أحدث الطلبات</p>
+              <p className="text-sm font-normal text-muted-foreground">أحدث الطلبات</p>
               <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-bold tracking-tight tabular-nums text-foreground">
+                <span className="text-3xl font-medium tracking-tight tabular-nums text-foreground">
                   {stats.recentApps.length}
                 </span>
                 <span className="text-xs text-muted-foreground">في مسارك</span>
@@ -187,10 +192,10 @@ export default async function DashboardPage() {
                 <table className="w-full border-collapse text-start">
                   <thead>
                     <tr className="border-y border-border/60 bg-muted/40">
-                      <th className="px-6 py-2.5 text-xs font-medium text-muted-foreground">الشركة</th>
-                      <th className="px-3 py-2.5 text-xs font-medium text-muted-foreground">التقييم</th>
-                      <th className="px-3 py-2.5 text-xs font-medium text-muted-foreground">التاريخ</th>
-                      <th className="px-6 py-2.5 text-end text-xs font-medium text-muted-foreground">الحالة</th>
+                      <th className="px-6 py-2.5 text-start text-xs font-medium text-muted-foreground">الشركة</th>
+                      <th className="px-3 py-2.5 text-start text-xs font-medium text-muted-foreground">التقييم</th>
+                      <th className="px-3 py-2.5 text-start text-xs font-medium text-muted-foreground">التاريخ</th>
+                      <th className="px-6 py-2.5 text-start text-xs font-medium text-muted-foreground">الحالة</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -204,15 +209,15 @@ export default async function DashboardPage() {
                                 {app.company.slice(0, 2).toUpperCase()}
                               </span>
                               <div className="min-w-0">
-                                <p className="truncate text-sm font-semibold text-foreground">{app.company}</p>
+                                <p className="truncate text-sm font-medium text-foreground">{app.company}</p>
                                 <p className="truncate text-xs text-muted-foreground">{app.role}</p>
                               </div>
                             </div>
                           </td>
-                          <td className="px-3 py-3.5">
+                          <td className="px-3 py-3.5 text-start">
                             {app.score ? (
                               <div className={cn('flex w-24 flex-col gap-1.5', scoreColor(app.score))}>
-                                <span className="text-xs font-semibold">{app.score.toFixed(1)}</span>
+                                <span className="text-xs font-medium tabular-nums">{app.score.toFixed(1)}</span>
                                 <span className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
                                   <span
                                     className="block h-full rounded-full bg-current"
@@ -224,10 +229,10 @@ export default async function DashboardPage() {
                               <span className="text-xs text-muted-foreground">—</span>
                             )}
                           </td>
-                          <td className="px-3 py-3.5">
+                          <td className="px-3 py-3.5 text-start">
                             <span className="whitespace-nowrap text-xs text-muted-foreground">{formatDateLong(app.date)}</span>
                           </td>
-                          <td className="px-6 py-3.5 text-end">
+                          <td className="px-6 py-3.5 text-start">
                             <StatusBadge status={app.status} />
                           </td>
                         </tr>

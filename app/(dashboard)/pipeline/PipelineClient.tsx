@@ -179,7 +179,7 @@ export function PipelineClient() {
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-foreground">قائمة الانتظار</h1>
+          <h1 className="text-2xl font-medium tracking-tight text-foreground">قائمة الانتظار</h1>
           <p className="mt-1 text-sm text-muted-foreground">{pending.length} قيد الانتظار · {done.length} مُعالَجة</p>
         </div>
         <div className="flex gap-2">
@@ -213,7 +213,7 @@ export function PipelineClient() {
         <CardContent className="flex flex-col gap-3">
           <Textarea
             placeholder="الصق رابطًا أو أكثر للوظائف (رابط في كل سطر)..."
-            className="min-h-[100px] bg-background font-mono text-sm"
+            className="min-h-[100px] bg-background font-mono text-sm placeholder:font-sans"
             value={addText}
             onChange={e => setAddText(e.target.value)}
           />

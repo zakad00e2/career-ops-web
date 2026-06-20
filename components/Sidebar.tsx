@@ -53,8 +53,8 @@ export function Sidebar() {
               <div className="flex aspect-square size-8 shrink-0 items-center justify-center">
                 <Radar className="text-violet-600" />
               </div>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">Career-Ops</span>
+              <div className="grid flex-1 text-start text-sm leading-tight">
+                <span className="truncate font-medium">Career-Ops</span>
                 <span className="truncate text-xs text-sidebar-foreground/70">مسار الذكاء الاصطناعي</span>
               </div>
             </SidebarMenuButton>
@@ -70,7 +70,7 @@ export function Sidebar() {
                 <SidebarMenuButton
                   render={<Link href="/evaluate" />}
                   tooltip="تقييم سريع"
-                  className="min-w-8 bg-primary text-primary-foreground duration-200 ease-linear hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground"
+                  className="btn-evaluate min-w-8 rounded-[10px]! border-0 shadow-none hover:bg-transparent active:bg-transparent data-active:bg-transparent data-active:text-white"
                 >
                   <PlusCircle />
                   <span>تقييم سريع</span>

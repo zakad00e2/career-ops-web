@@ -107,8 +107,14 @@ export function ApplicationsClient() {
     }
   }
 
+  const headLabelClass = 'text-muted-foreground';
+
+  const staticHead = (label: string) => (
+    <span className={headLabelClass}>{label}</span>
+  );
+
   const sortableHead = (field: SortField, label: string) => (
-    <Button variant="ghost" size="xs" className="h-auto px-0 text-muted-foreground" onClick={() => toggleSort(field)}>
+    <Button variant="ghost" size="xs" className={cn('h-auto w-full justify-start px-0', headLabelClass)} onClick={() => toggleSort(field)}>
       {label}
       <ArrowUpDown />
     </Button>
@@ -118,7 +124,7 @@ export function ApplicationsClient() {
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-foreground">الطلبات</h1>
+          <h1 className="text-2xl font-medium tracking-tight text-foreground">الطلبات</h1>
           <p className="mt-1 text-sm text-muted-foreground">{apps.length} إجمالاً · {filtered.length} ظاهرة</p>
         </div>
         <Button variant="outline" size="sm" onClick={load} disabled={loading}>
@@ -139,7 +145,9 @@ export function ApplicationsClient() {
         </div>
         <Select value={statusFilter} onValueChange={(v) => setStatusFilter(v ?? 'all')}>
           <SelectTrigger className="w-44">
-            <SelectValue placeholder="الحالة" />
+            <SelectValue placeholder="الحالة">
+              {statusFilter !== 'all' ? statusLabel(statusFilter) : null}
+            </SelectValue>
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">كل الحالات</SelectItem>
@@ -156,11 +164,11 @@ export function ApplicationsClient() {
             <TableRow>
               <TableHead className="w-12">#</TableHead>
               <TableHead>{sortableHead('company', 'الشركة')}</TableHead>
-              <TableHead>الدور</TableHead>
+              <TableHead>{staticHead('الدور')}</TableHead>
               <TableHead>{sortableHead('date', 'التاريخ')}</TableHead>
               <TableHead>{sortableHead('score', 'التقييم')}</TableHead>
               <TableHead>{sortableHead('status', 'الحالة')}</TableHead>
-              <TableHead>إجراءات</TableHead>
+              <TableHead>{staticHead('إجراءات')}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -191,7 +199,7 @@ export function ApplicationsClient() {
                   <TableCell className="text-xs text-muted-foreground">{app.date}</TableCell>
                   <TableCell>
                     {app.score ? (
-                      <span className={cn('rounded-full px-2 py-0.5 text-xs font-semibold', scoreBg(app.score), scoreColor(app.score))}>
+                      <span className={cn('rounded-full px-2 py-0.5 text-xs font-medium tabular-nums', scoreBg(app.score), scoreColor(app.score))}>
                         {app.score.toFixed(1)}
                       </span>
                     ) : (
@@ -201,7 +209,9 @@ export function ApplicationsClient() {
                   <TableCell>
                     <Select value={app.status} onValueChange={(v) => { if (v) updateStatus(app.id, v); }}>
                       <SelectTrigger size="sm" className="w-36 border-transparent bg-transparent hover:bg-muted/50 dark:bg-transparent">
-                        <SelectValue />
+                        <SelectValue>
+                          <StatusBadge status={app.status} className="border-transparent bg-transparent px-0" />
+                        </SelectValue>
                       </SelectTrigger>
                       <SelectContent className="min-w-44">
                         {CANONICAL_STATUSES.map(s => (
