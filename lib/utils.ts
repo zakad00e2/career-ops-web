@@ -71,3 +71,37 @@ export const CANONICAL_STATUSES = [
   "Discarded",
   "SKIP",
 ] as const
+
+export const STATUS_LABELS_AR: Record<string, string> = {
+  Evaluated: "تم التقييم",
+  Applied: "تم التقديم",
+  Responded: "تم الرد",
+  Interview: "مقابلة",
+  Offer: "عرض",
+  Rejected: "مرفوض",
+  Discarded: "مُستبعد",
+  SKIP: "تخطّي",
+}
+
+export function statusLabel(status: string): string {
+  return STATUS_LABELS_AR[status] ?? status
+}
+
+export const LEGITIMACY_LABELS_AR: Record<string, string> = {
+  "High Confidence": "موثوقية عالية",
+  Suspicious: "مشبوه",
+}
+
+export function legitimacyLabel(legitimacy: string | null): string {
+  if (!legitimacy) return ""
+  return LEGITIMACY_LABELS_AR[legitimacy] ?? legitimacy
+}
+
+export const PIPELINE_STATUS_LABELS_AR: Record<string, string> = {
+  pending: "قيد الانتظار",
+  done: "مكتمل",
+}
+
+export function pipelineStatusLabel(status: string): string {
+  return PIPELINE_STATUS_LABELS_AR[status] ?? status
+}

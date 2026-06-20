@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn, statusLabel } from '@/lib/utils';
 
 const STATUS_DOT: Record<string, string> = {
   Evaluated: 'bg-zinc-400',
@@ -20,7 +20,7 @@ export function StatusBadge({ status, className }: { status: string; className?:
       )}
     >
       <span className={cn('size-1.5 shrink-0 rounded-full', STATUS_DOT[status] ?? 'bg-zinc-400')} />
-      {status}
+      {statusLabel(status)}
     </span>
   );
 }
