@@ -26,21 +26,21 @@ import {
 } from '@/components/ui/sidebar';
 
 const primaryNav = [
-  { href: '/', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/applications', label: 'Applications', icon: Briefcase, badge: '10' },
-  { href: '/pipeline', label: 'Pipeline', icon: GitBranch, badge: '3' },
-  { href: '/reports', label: 'Reports', icon: FileText },
+  { href: '/', label: 'لوحة التحكم', icon: LayoutDashboard },
+  { href: '/applications', label: 'الطلبات', icon: Briefcase, badge: '10' },
+  { href: '/pipeline', label: 'قائمة الانتظار', icon: GitBranch, badge: '3' },
+  { href: '/reports', label: 'التقارير', icon: FileText },
 ];
 
 const toolNav = [
-  { href: '/settings', label: 'Settings', icon: Settings },
+  { href: '/settings', label: 'الإعدادات', icon: Settings },
 ];
 
 export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <SidebarPrimitive collapsible="offcanvas" variant="inset">
+    <SidebarPrimitive collapsible="offcanvas" variant="inset" side="right">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -55,7 +55,7 @@ export function Sidebar() {
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">Career-Ops</span>
-                <span className="truncate text-xs text-sidebar-foreground/70">AI pipeline</span>
+                <span className="truncate text-xs text-sidebar-foreground/70">مسار الذكاء الاصطناعي</span>
               </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -69,11 +69,11 @@ export function Sidebar() {
               <SidebarMenuItem className="flex items-center gap-2">
                 <SidebarMenuButton
                   render={<Link href="/evaluate" />}
-                  tooltip="Quick evaluate"
+                  tooltip="تقييم سريع"
                   className="min-w-8 bg-primary text-primary-foreground duration-200 ease-linear hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground"
                 >
                   <PlusCircle />
-                  <span>Quick evaluate</span>
+                  <span>تقييم سريع</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
@@ -81,7 +81,7 @@ export function Sidebar() {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel>Workspace</SidebarGroupLabel>
+          <SidebarGroupLabel>مساحة العمل</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {primaryNav.map(({ href, label, icon: Icon, badge }) => {
@@ -102,7 +102,7 @@ export function Sidebar() {
         </SidebarGroup>
 
         <SidebarGroup className="mt-auto">
-          <SidebarGroupLabel>Tools</SidebarGroupLabel>
+          <SidebarGroupLabel>الأدوات</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {toolNav.map(({ href, label, icon: Icon }) => {

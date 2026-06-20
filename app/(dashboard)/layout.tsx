@@ -21,7 +21,7 @@ export default function DashboardLayout({
           <SidebarTrigger />
           <div className="min-w-0">
             <p className="truncate text-sm font-medium text-foreground">Career-Ops</p>
-            <p className="truncate text-xs text-muted-foreground md:hidden">AI job search pipeline</p>
+            <p className="truncate text-xs text-muted-foreground md:hidden">مسار البحث عن وظيفة بالذكاء الاصطناعي</p>
           </div>
         </header>
         <main className="flex-1">
