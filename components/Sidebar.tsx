@@ -2,6 +2,9 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import {
   Briefcase,
   FileText,
@@ -24,6 +27,9 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from '@/components/ui/sidebar';
+import { prefersReducedMotion } from '@/lib/gsap/motion';
+
+gsap.registerPlugin(useGSAP);
 
 const primaryNav = [
   { href: '/', label: 'لوحة التحكم', icon: LayoutDashboard },
@@ -38,6 +44,24 @@ const toolNav = [
 
 export function Sidebar() {
   const pathname = usePathname();
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (prefersReducedMotion() || !contentRef.current) return;
+
+      const items = contentRef.current.querySelectorAll('[data-sidebar="menu-item"]');
+      gsap.from(items, {
+        opacity: 0,
+        x: 16,
+        duration: 0.45,
+        stagger: 0.06,
+        ease: 'power2.out',
+        clearProps: 'opacity,transform',
+      });
+    },
+    { scope: contentRef },
+  );
 
   return (
     <SidebarPrimitive collapsible="offcanvas" variant="inset" side="right">
@@ -62,7 +86,7 @@ export function Sidebar() {
         </SidebarMenu>
       </SidebarHeader>
 
-      <SidebarContent>
+      <SidebarContent ref={contentRef}>
         <SidebarGroup>
           <SidebarGroupContent className="flex flex-col gap-2">
             <SidebarMenu>

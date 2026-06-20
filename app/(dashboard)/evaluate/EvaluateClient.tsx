@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { AlertTriangle, Check, Copy, FileDown, Loader2, Save, Zap } from 'lucide-react';
+import { StaggerReveal } from '@/components/motion/StaggerReveal';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -206,14 +207,14 @@ export function EvaluateClient({ initialUrl = '' }: { initialUrl?: string }) {
   }
 
   return (
-    <div className="flex flex-col gap-6">
-      <div>
+    <StaggerReveal className="flex flex-col gap-6">
+      <div data-motion-item>
         <h1 className="text-2xl font-medium tracking-tight text-foreground">قيّم وظيفة</h1>
         <p className="mt-1 text-sm text-muted-foreground">الصق رابط وظيفة أو وصفها للحصول على تقييم كامل من 1 إلى 5</p>
       </div>
 
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
-        <Card className="gap-2">
+        <Card className="gap-2" data-motion-item>
           <CardHeader className="pb-0">
             <CardTitle className="text-base">إعلان الوظيفة</CardTitle>
           </CardHeader>
@@ -249,7 +250,7 @@ export function EvaluateClient({ initialUrl = '' }: { initialUrl?: string }) {
           </CardContent>
         </Card>
 
-        <Card className="gap-2">
+        <Card className="gap-2" data-motion-item>
           <CardHeader className="pb-0">
             <div className="flex items-center justify-between gap-3">
               <CardTitle className="text-base">تقرير التقييم</CardTitle>
@@ -328,7 +329,7 @@ export function EvaluateClient({ initialUrl = '' }: { initialUrl?: string }) {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </StaggerReveal>
   );
 }
 

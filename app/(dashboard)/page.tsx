@@ -5,6 +5,9 @@ import { desc, eq } from 'drizzle-orm';
 import { Clock } from 'lucide-react';
 import type { Application } from '@/lib/db/schema';
 import { DashboardCharts } from '@/components/DashboardCharts';
+import { CountUp } from '@/components/motion/CountUp';
+import { HoverLift } from '@/components/motion/HoverLift';
+import { StaggerReveal } from '@/components/motion/StaggerReveal';
 import { StatusBadge } from '@/components/StatusBadge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -135,18 +138,21 @@ export default async function DashboardPage() {
   };
 
   return (
-    <div className="flex flex-col gap-8">
-      <div>
+    <StaggerReveal className="flex flex-col gap-8">
+      <div data-motion-item>
         <h1 className="text-2xl font-medium tracking-tight text-foreground">لوحة التحكم</h1>
         <p className="mt-1 text-sm text-muted-foreground">نظرة سريعة على مسار بحثك عن عمل</p>
       </div>
 
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         {statCards.map(({ label, value, delta }) => (
-          <Card key={label} size="sm" className="flex flex-col py-3">
-            <CardContent className="flex flex-col gap-2 py-0">
-              <p className="text-xs font-medium text-foreground">{label}</p>
-              <p className="text-3xl font-medium tracking-tight tabular-nums text-foreground">{value}</p>
+          <HoverLift key={label} data-motion-item>
+            <Card size="sm" className="flex h-full flex-col py-3">
+              <CardContent className="flex flex-col gap-2 py-0">
+                <p className="text-xs font-medium text-foreground">{label}</p>
+                <p className="text-3xl font-medium tracking-tight tabular-nums text-foreground">
+                  <CountUp value={value} />
+                </p>
               {delta ? (
                 <p className="text-xs text-muted-foreground">
                   <bdi dir="ltr" className={cn('font-medium', toneClass[delta.tone])}>{delta.lead}</bdi>
@@ -157,17 +163,20 @@ export default async function DashboardPage() {
               )}
             </CardContent>
           </Card>
+          </HoverLift>
         ))}
       </div>
 
+      <div data-motion-item>
       <DashboardCharts
         scoreDist={stats.scoreDist}
         recentApps={stats.recentApps}
         greetingName="حمود"
         activePct={stats.total > 0 ? (stats.applied / stats.total) * 100 : 0}
       />
+      </div>
 
-      <div className="grid grid-cols-1 items-start gap-6">
+      <div className="grid grid-cols-1 items-start gap-6" data-motion-item>
         <Card className="shadow-none">
           <CardHeader className="flex flex-row items-start justify-between gap-3 pb-4">
             <div className="flex flex-col gap-2">
@@ -247,7 +256,7 @@ export default async function DashboardPage() {
 
       </div>
 
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap gap-3" data-motion-item>
         <Link href="/evaluate">
           <Button>قيّم وظيفة</Button>
         </Link>
@@ -255,6 +264,6 @@ export default async function DashboardPage() {
           <Button variant="secondary">عرض القائمة ({stats.pendingPipeline})</Button>
         </Link>
       </div>
-    </div>
+    </StaggerReveal>
   );
 }

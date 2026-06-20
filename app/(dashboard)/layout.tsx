@@ -1,5 +1,6 @@
 import { Sidebar } from '@/components/Sidebar';
 import { DemoBanner } from '@/components/DemoBanner';
+import { PageMotion } from '@/components/motion/PageMotion';
 import {
   SidebarInset,
   SidebarProvider,
@@ -25,9 +26,7 @@ export default function DashboardLayout({
           </div>
         </header>
         <main className="flex-1">
-          <div className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
-            {children}
-          </div>
+          <PageMotion>{children}</PageMotion>
         </main>
       </SidebarInset>
     </SidebarProvider>
