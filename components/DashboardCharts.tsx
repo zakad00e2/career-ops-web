@@ -33,21 +33,21 @@ const scoreBarGradients = [
 
 const scoreChartConfig = {
   desktop: {
-    label: 'Applications',
+    label: 'الطلبات',
     color: '#3b82f6',
   },
 } satisfies ChartConfig;
 
 const statusGroups = [
-  { key: 'active', label: 'Active', color: '#3b82f6', statuses: ['Applied', 'Responded', 'Interview', 'Offer'] },
-  { key: 'evaluated', label: 'Evaluated', color: '#8b5cf6', statuses: ['Evaluated'] },
-  { key: 'closed', label: 'Closed', color: '#c4b5fd', statuses: ['Rejected', 'Discarded', 'SKIP'] },
+  { key: 'active', label: 'نشِطة', color: '#3b82f6', statuses: ['Applied', 'Responded', 'Interview', 'Offer'] },
+  { key: 'evaluated', label: 'مُقيَّمة', color: '#8b5cf6', statuses: ['Evaluated'] },
+  { key: 'closed', label: 'مغلقة', color: '#c4b5fd', statuses: ['Rejected', 'Discarded', 'SKIP'] },
 ] as const;
 
 const statusChartConfig = {
-  active: { label: 'Active', color: '#3b82f6' },
-  evaluated: { label: 'Evaluated', color: '#8b5cf6' },
-  closed: { label: 'Closed', color: '#c4b5fd' },
+  active: { label: 'نشِطة', color: '#3b82f6' },
+  evaluated: { label: 'مُقيَّمة', color: '#8b5cf6' },
+  closed: { label: 'مغلقة', color: '#c4b5fd' },
 } satisfies ChartConfig;
 
 export function DashboardCharts({
@@ -97,12 +97,12 @@ export function DashboardCharts({
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <Card className="flex h-full flex-col rounded-2xl border border-border/60 bg-card pb-3 shadow-sm">
         <CardHeader className="gap-3 pb-2">
-          <CardTitle className="text-sm font-medium text-muted-foreground">Score Distribution</CardTitle>
+          <CardTitle className="text-sm font-medium text-muted-foreground">توزيع التقييمات</CardTitle>
           <div className="flex items-baseline gap-2">
             <span className="text-3xl font-bold tracking-tight tabular-nums text-foreground">
               {avgScore > 0 ? avgScore.toFixed(1) : '—'}
             </span>
-            <span className="text-xs text-muted-foreground">Avg fit score</span>
+            <span className="text-xs text-muted-foreground">متوسط التقييم</span>
           </div>
         </CardHeader>
         <CardContent className="flex flex-1 flex-col px-6 pb-2 pt-0">
@@ -167,17 +167,17 @@ export function DashboardCharts({
 
       <Card className="flex h-full flex-col rounded-2xl border border-border/60 bg-card pb-3 shadow-sm">
         <CardHeader className="gap-3 pb-2">
-          <CardTitle className="text-sm font-medium text-muted-foreground">Applications by Status</CardTitle>
+          <CardTitle className="text-sm font-medium text-muted-foreground">الطلبات حسب الحالة</CardTitle>
           <div className="flex items-baseline gap-2">
             <span className="text-3xl font-bold tracking-tight tabular-nums text-foreground">
               {avgPerStatus > 0 ? avgPerStatus.toFixed(1) : '—'}
             </span>
-            <span className="text-xs text-muted-foreground">Avg per status</span>
+            <span className="text-xs text-muted-foreground">المتوسط لكل حالة</span>
           </div>
         </CardHeader>
         <CardContent className="flex flex-1 flex-col justify-center px-6 pb-2 pt-0">
           {totalApps === 0 ? (
-            <p className="flex flex-1 items-center justify-center py-10 text-center text-sm text-muted-foreground">No applications yet</p>
+            <p className="flex flex-1 items-center justify-center py-10 text-center text-sm text-muted-foreground">لا توجد طلبات بعد</p>
           ) : (
             <>
               <div className="mx-auto w-full max-w-[260px] lg:max-w-[340px]">
@@ -231,7 +231,7 @@ export function DashboardCharts({
                     </svg>
                     <div className="absolute inset-x-0 top-0 bottom-1/2 flex flex-col items-center justify-end pb-1">
                       <span className="text-3xl font-bold tracking-tight tabular-nums text-foreground">{totalApps}</span>
-                      <span className="text-xs text-muted-foreground">Total</span>
+                      <span className="text-xs text-muted-foreground">الإجمالي</span>
                     </div>
                   </div>
                 </div>
