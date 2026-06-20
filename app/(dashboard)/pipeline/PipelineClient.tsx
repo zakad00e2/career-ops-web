@@ -11,7 +11,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Textarea } from '@/components/ui/textarea';
-import { cn } from '@/lib/utils';
+import { cn, pipelineStatusLabel } from '@/lib/utils';
 
 interface PipelineItem {
   id: number;
@@ -131,30 +131,30 @@ export function PipelineClient() {
       <Dialog open={pickerOpen} onOpenChange={setPickerOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Choose companies to scan</DialogTitle>
-            <DialogDescription>Select which portals to include in this scan.</DialogDescription>
+            <DialogTitle>اختر الشركات للمسح</DialogTitle>
+            <DialogDescription>حدّد البوابات المراد تضمينها في هذا المسح.</DialogDescription>
           </DialogHeader>
 
           <div className="relative">
-            <Search className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
+            <Search className="pointer-events-none absolute top-1/2 start-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
             <Input
-              placeholder="Search companies..."
-              className="pl-8"
+              placeholder="ابحث عن شركات..."
+              className="ps-8"
               value={companyQuery}
               onChange={e => setCompanyQuery(e.target.value)}
             />
           </div>
 
           <div className="flex items-center justify-between border-b pb-2">
-            <span className="text-xs text-muted-foreground">{selected.size} of {companies.length} selected</span>
+            <span className="text-xs text-muted-foreground">{selected.size} من {companies.length} محدد</span>
             <Button variant="ghost" size="xs" onClick={toggleSelectAll} disabled={filteredCompanies.length === 0}>
-              {allFilteredSelected ? 'Clear all' : 'Select all'}
+              {allFilteredSelected ? 'إلغاء الكل' : 'تحديد الكل'}
             </Button>
           </div>
 
           <div className="flex max-h-72 flex-col gap-1 overflow-y-auto">
             {filteredCompanies.length === 0 ? (
-              <p className="py-4 text-center text-sm text-muted-foreground">No companies match &ldquo;{companyQuery}&rdquo;</p>
+              <p className="py-4 text-center text-sm text-muted-foreground">لا توجد شركات مطابقة لـ &ldquo;{companyQuery}&rdquo;</p>
             ) : (
               filteredCompanies.map(company => (
                 <label
@@ -171,7 +171,7 @@ export function PipelineClient() {
           <DialogFooter showCloseButton>
             <Button onClick={handleScan} disabled={selected.size === 0}>
               <Radar />
-              Scan {selected.size} {selected.size === 1 ? 'company' : 'companies'}
+              امسح {selected.size} شركة
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -179,17 +179,17 @@ export function PipelineClient() {
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-foreground">Pipeline</h1>
-          <p className="mt-1 text-sm text-muted-foreground">{pending.length} pending · {done.length} processed</p>
+          <h1 className="text-2xl font-semibold tracking-tight text-foreground">قائمة الانتظار</h1>
+          <p className="mt-1 text-sm text-muted-foreground">{pending.length} قيد الانتظار · {done.length} مُعالَجة</p>
         </div>
         <div className="flex gap-2">
           <Button variant="outline" size="sm" onClick={load} disabled={loading}>
             <RefreshCw className={cn(loading && 'animate-spin')} />
-            Refresh
+            تحديث
           </Button>
           <Button size="sm" onClick={openPicker} disabled={scanning}>
             {scanning ? <Loader2 className="animate-spin" /> : <Radar />}
-            Scan Portals
+            مسح البوابات
           </Button>
         </div>
       </div>
@@ -198,7 +198,7 @@ export function PipelineClient() {
         <Alert>
           <CheckCircle />
           <AlertDescription>
-            Scan complete - {scanResult.found} found, {scanResult.added} new added to pipeline
+            اكتمل المسح - تم العثور على {scanResult.found}، وأُضيف {scanResult.added} جديدة إلى القائمة
           </AlertDescription>
         </Alert>
       )}
@@ -207,19 +207,19 @@ export function PipelineClient() {
         <CardHeader className="pb-0">
           <CardTitle className="flex items-center gap-2 text-base">
             <Plus />
-            Add Job URLs
+            إضافة روابط وظائف
           </CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-3">
           <Textarea
-            placeholder="Paste one or more job URLs (one per line)..."
+            placeholder="الصق رابطًا أو أكثر للوظائف (رابط في كل سطر)..."
             className="min-h-[100px] bg-background font-mono text-sm"
             value={addText}
             onChange={e => setAddText(e.target.value)}
           />
           <Button size="sm" className="w-fit" onClick={handleAdd} disabled={adding || !addText.trim()}>
             {adding ? <Loader2 className="animate-spin" /> : <Plus />}
-            Add to Pipeline
+            إضافة إلى القائمة
           </Button>
         </CardContent>
       </Card>
@@ -228,7 +228,7 @@ export function PipelineClient() {
         <CardHeader className="pb-0">
           <CardTitle className="flex items-center gap-2 text-base">
             <Clock />
-            Pending ({pending.length})
+            قيد الانتظار ({pending.length})
           </CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-2">
@@ -240,13 +240,13 @@ export function PipelineClient() {
               </div>
             ))
           ) : pending.length === 0 ? (
-            <p className="py-4 text-center text-sm text-muted-foreground">No pending items - run a scan or add URLs above</p>
+            <p className="py-4 text-center text-sm text-muted-foreground">لا توجد عناصر قيد الانتظار - شغّل مسحًا أو أضف روابط بالأعلى</p>
           ) : (
             pending.map(item => (
               <div key={item.id} className="flex flex-col gap-3 rounded-lg border bg-background p-3 sm:flex-row sm:items-center">
                 <div className="min-w-0 flex-1">
                   <div className="mb-1 flex items-center gap-2">
-                    <Badge variant="secondary">{item.status}</Badge>
+                    <Badge variant="secondary">{pipelineStatusLabel(item.status)}</Badge>
                     {item.notes && <p className="truncate text-xs font-medium text-foreground">{item.notes}</p>}
                   </div>
                   <a
@@ -261,15 +261,15 @@ export function PipelineClient() {
                 <div className="flex shrink-0 items-center gap-1">
                   <a href={`/evaluate?url=${encodeURIComponent(item.url)}`}>
                     <Button size="xs">
-                      Evaluate
+                      تقييم
                     </Button>
                   </a>
-                  <a href={item.url} target="_blank" rel="noopener noreferrer" title="Open URL">
+                  <a href={item.url} target="_blank" rel="noopener noreferrer" title="فتح الرابط">
                     <Button size="icon-xs" variant="ghost">
                       <ExternalLink />
                     </Button>
                   </a>
-                  <Button size="icon-xs" variant="ghost" onClick={() => markDone(item.id)} title="Mark done">
+                  <Button size="icon-xs" variant="ghost" onClick={() => markDone(item.id)} title="وضع علامة مكتمل">
                     <CheckCircle />
                   </Button>
                   <Button size="icon-xs" variant="ghost" onClick={() => deleteItem(item.id)}>
