@@ -37,6 +37,11 @@ When no previous fingerprint exists, the scan establishes the initial
 fingerprint without deleting pending jobs. This avoids treating deployment of
 the feature as if the user had changed their CV.
 
+If the user saves a changed CV before any scan fingerprint exists, the profile
+route stores the old CV fingerprint as the baseline. This lets the next scan
+detect the change immediately while still deferring all deletion until the
+scan starts. Internal fingerprint keys are not returned to the settings UI.
+
 ## Cleanup and Scan History
 
 Before deleting pending pipeline rows, collect their URLs. Delete those pending

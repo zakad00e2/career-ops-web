@@ -27,11 +27,19 @@ export function PipelineClient() {
   const [scanning, setScanning] = useState(false);
   const [addText, setAddText] = useState('');
   const [adding, setAdding] = useState(false);
-  const [scanResult, setScanResult] = useState<{ found: number; added: number } | null>(null);
+  const [scanResult, setScanResult] = useState<{
+    found: number;
+    added: number;
+    clearedPending?: number;
+    titleFilter?: string[];
+  } | null>(null);
   const [companies, setCompanies] = useState<string[]>([]);
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [pickerOpen, setPickerOpen] = useState(false);
   const [companyQuery, setCompanyQuery] = useState('');
+  const [scanKeywords, setScanKeywords] = useState<string[]>([]);
+  const [scanProfileReady, setScanProfileReady] = useState(true);
+  const [loadingKeywords, setLoadingKeywords] = useState(false);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -60,16 +68,32 @@ export function PipelineClient() {
     await load();
   }
 
-  // Open the company picker before scanning. Loads the company list on first use
-  // and selects all of them by default.
+  // Open the company picker before scanning. Loads the company list on first use,
+  // selects all by default, and refreshes CV-derived keywords every time.
   async function openPicker() {
-    if (companies.length === 0) {
-      const list: string[] = await fetch('/api/scan/companies').then(r => r.json());
-      setCompanies(list);
-      setSelected(new Set(list));
-    }
-    setCompanyQuery('');
+    setLoadingKeywords(true);
     setPickerOpen(true);
+    setCompanyQuery('');
+
+    const [companyList, keywordData] = await Promise.all([
+      companies.length > 0
+        ? Promise.resolve(companies)
+        : fetch('/api/scan/companies').then(r => r.json()) as Promise<string[]>,
+      fetch('/api/scan/title-filter').then(r => r.json()) as Promise<{
+        titleFilter?: string[];
+        hasCv?: boolean;
+        hasTargetRole?: boolean;
+      }>,
+    ]);
+
+    if (companies.length === 0) {
+      setCompanies(companyList);
+      setSelected(new Set(companyList));
+    }
+
+    setScanKeywords(keywordData.titleFilter ?? []);
+    setScanProfileReady(Boolean(keywordData.hasCv || keywordData.hasTargetRole));
+    setLoadingKeywords(false);
   }
 
   function toggleCompany(company: string) {
@@ -104,7 +128,12 @@ export function PipelineClient() {
       body: JSON.stringify({ companies: [...selected] }),
     });
     const data = await res.json();
-    setScanResult({ found: data.found, added: data.added });
+    setScanResult({
+      found: data.found,
+      added: data.added,
+      clearedPending: data.clearedPending,
+      titleFilter: data.titleFilter,
+    });
     setScanning(false);
     await load();
   }
@@ -129,11 +158,39 @@ export function PipelineClient() {
   return (
     <div className="flex flex-col gap-6">
       <Dialog open={pickerOpen} onOpenChange={setPickerOpen}>
-        <DialogContent>
+        <DialogContent className="flex max-h-[calc(100dvh-2rem)] flex-col overflow-hidden">
           <DialogHeader>
             <DialogTitle>اختر الشركات للمسح</DialogTitle>
             <DialogDescription>حدّد البوابات المراد تضمينها في هذا المسح.</DialogDescription>
           </DialogHeader>
+
+          <div className="rounded-lg border bg-muted/30 p-3">
+            {loadingKeywords ? (
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <Loader2 className="size-3.5 animate-spin" />
+                جاري تحليل سيرتك الذاتية...
+              </div>
+            ) : scanProfileReady ? (
+              <div className="flex flex-col gap-2">
+                <p className="text-xs text-muted-foreground">
+                  سيُعرض فقط ما يطابق سيرتك الذاتية والدور المستهدف. غيّر السيرة في الإعدادات ثم أعد المسح.
+                </p>
+                {scanKeywords.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5">
+                    {scanKeywords.map(keyword => (
+                      <Badge key={keyword} variant="secondary" className="font-normal">{keyword}</Badge>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <p className="text-xs text-muted-foreground">
+                أضف سيرتك الذاتية والدور المستهدف في{' '}
+                <a href="/settings" className="font-medium text-primary underline-offset-2 hover:underline">الإعدادات</a>
+                {' '}لتصفية الوظائف حسب ملفك.
+              </p>
+            )}
+          </div>
 
           <div className="relative">
             <Search className="pointer-events-none absolute top-1/2 start-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
@@ -152,7 +209,7 @@ export function PipelineClient() {
             </Button>
           </div>
 
-          <div className="flex max-h-72 flex-col gap-1 overflow-y-auto">
+          <div className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto">
             {filteredCompanies.length === 0 ? (
               <p className="py-4 text-center text-sm text-muted-foreground">لا توجد شركات مطابقة لـ &ldquo;{companyQuery}&rdquo;</p>
             ) : (
@@ -197,8 +254,23 @@ export function PipelineClient() {
       {scanResult && (
         <Alert>
           <CheckCircle />
-          <AlertDescription>
-            اكتمل المسح - تم العثور على {scanResult.found}، وأُضيف {scanResult.added} جديدة إلى القائمة
+          <AlertDescription className="flex flex-col gap-2">
+            <span>
+              اكتمل المسح - تم العثور على {scanResult.found}، وأُضيف {scanResult.added} جديدة إلى القائمة
+            </span>
+            {Boolean(scanResult.clearedPending) && (
+              <span className="text-xs text-muted-foreground">
+                تم حذف {scanResult.clearedPending} من الوظائف القديمة قيد الانتظار بعد تغيير السيرة الذاتية.
+              </span>
+            )}
+            {scanResult.titleFilter && scanResult.titleFilter.length > 0 && (
+              <span className="flex flex-wrap items-center gap-1.5">
+                <span className="text-xs text-muted-foreground">مطابقة بناءً على سيرتك الذاتية:</span>
+                {scanResult.titleFilter.map(keyword => (
+                  <Badge key={keyword} variant="secondary" className="font-normal">{keyword}</Badge>
+                ))}
+              </span>
+            )}
           </AlertDescription>
         </Alert>
       )}

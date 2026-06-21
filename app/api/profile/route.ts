@@ -2,6 +2,10 @@ import { NextRequest } from 'next/server';
 import { db, profile } from '@/lib/db';
 import { DEMO_MODE } from '@/lib/mock-data';
 import { eq } from 'drizzle-orm';
+import {
+  initialFingerprintForCvChange,
+  LAST_SCANNED_CV_FINGERPRINT_KEY,
+} from '@/lib/scan-cv-state';
 
 const demoProfile: Record<string, string> = {
   name: 'Demo User',
@@ -20,6 +24,7 @@ export async function GET() {
   const rows = await db.select().from(profile);
   const result: Record<string, string> = {};
   for (const row of rows) {
+    if (row.key.startsWith('__')) continue;
     result[row.key] = row.value;
   }
   return Response.json(result);
@@ -27,8 +32,39 @@ export async function GET() {
 
 export async function PUT(req: NextRequest) {
   const body = await req.json() as Record<string, string>;
+  const publicEntries = Object.entries(body).filter(([key]) => !key.startsWith('__'));
 
-  for (const [key, value] of Object.entries(body)) {
+  if (Object.hasOwn(body, 'cv')) {
+    const [[existingCv], [storedFingerprint]] = await Promise.all([
+      db
+        .select({ value: profile.value })
+        .from(profile)
+        .where(eq(profile.key, 'cv'))
+        .limit(1),
+      db
+        .select({ value: profile.value })
+        .from(profile)
+        .where(eq(profile.key, LAST_SCANNED_CV_FINGERPRINT_KEY))
+        .limit(1),
+    ]);
+    const initialFingerprint = initialFingerprintForCvChange(
+      existingCv?.value,
+      body.cv,
+      storedFingerprint?.value,
+    );
+
+    if (initialFingerprint) {
+      await db
+        .insert(profile)
+        .values({
+          key: LAST_SCANNED_CV_FINGERPRINT_KEY,
+          value: initialFingerprint,
+        })
+        .onConflictDoNothing();
+    }
+  }
+
+  for (const [key, value] of publicEntries) {
     await db
       .insert(profile)
       .values({ key, value })
@@ -38,5 +74,5 @@ export async function PUT(req: NextRequest) {
       });
   }
 
-  return Response.json({ saved: Object.keys(body).length });
+  return Response.json({ saved: publicEntries.length });
 }

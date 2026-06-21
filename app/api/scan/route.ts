@@ -1,20 +1,13 @@
 import { NextRequest } from 'next/server';
+import { eq, inArray } from 'drizzle-orm';
 import { scanPortals, DEFAULT_TARGETS, type ScanTarget } from '@/lib/scanner';
-import { db, scanHistory, pipeline as pipelineTable, profile } from '@/lib/db';
-import { deriveTitleFilter } from '@/lib/title-filter';
-
-// Reads the CV + target role from the profile table and turns them into scan
-// title keywords. Re-runs every scan, so editing the CV in Settings changes results.
-async function cvTitleFilter(): Promise<string[]> {
-  try {
-    const rows = await db.select().from(profile);
-    const map: Record<string, string> = {};
-    for (const row of rows) map[row.key] = row.value;
-    return deriveTitleFilter(map.cv, map.targetRole);
-  } catch {
-    return [];
-  }
-}
+import { db, profile, scanHistory, pipeline as pipelineTable } from '@/lib/db';
+import { buildTitleFilterFromProfile } from '@/lib/build-title-filter';
+import {
+  fingerprintCv,
+  LAST_SCANNED_CV_FINGERPRINT_KEY,
+  shouldClearPendingJobs,
+} from '@/lib/scan-cv-state';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
@@ -32,13 +25,37 @@ export async function POST(req: NextRequest) {
       ? DEFAULT_TARGETS.filter(target => requestedCompanies.includes(target.company.toLowerCase()))
       : DEFAULT_TARGETS;
     const targets: ScanTarget[] = Array.isArray(body.targets) ? body.targets : selectedTargets;
-    // Explicit filter from the request wins; otherwise derive it from the CV.
+
+    // Explicit filter from the request wins; otherwise derive from CV + target role.
+    const derived = await buildTitleFilterFromProfile();
     const titleFilter: string[] = Array.isArray(body.titleFilter)
       ? body.titleFilter
-      : await cvTitleFilter();
+      : derived.titleFilter;
 
     if (targets.length === 0) {
       return Response.json({ error: 'Select at least one company to scan.' }, { status: 400 });
+    }
+
+    const currentFingerprint = fingerprintCv(derived.cv);
+    const [storedFingerprint] = await db
+      .select({ value: profile.value })
+      .from(profile)
+      .where(eq(profile.key, LAST_SCANNED_CV_FINGERPRINT_KEY))
+      .limit(1);
+
+    let clearedPending = 0;
+    if (shouldClearPendingJobs(storedFingerprint?.value, currentFingerprint)) {
+      const pendingRows = await db
+        .select({ url: pipelineTable.url })
+        .from(pipelineTable)
+        .where(eq(pipelineTable.status, 'pending'));
+      const pendingUrls = pendingRows.map(row => row.url);
+
+      await db.delete(pipelineTable).where(eq(pipelineTable.status, 'pending'));
+      if (pendingUrls.length > 0) {
+        await db.delete(scanHistory).where(inArray(scanHistory.url, pendingUrls));
+      }
+      clearedPending = pendingUrls.length;
     }
 
     const existingHistory = await db.select({ url: scanHistory.url }).from(scanHistory);
@@ -67,9 +84,20 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    await db
+      .insert(profile)
+      .values({ key: LAST_SCANNED_CV_FINGERPRINT_KEY, value: currentFingerprint })
+      .onConflictDoUpdate({
+        target: profile.key,
+        set: { value: currentFingerprint, updatedAt: new Date() },
+      });
+
     return Response.json({
       found: jobs.length,
       added,
+      clearedPending,
+      titleFilter,
+      hasCv: Boolean(derived.cv),
       jobs: jobs.slice(0, 50),
     });
   } catch (err) {

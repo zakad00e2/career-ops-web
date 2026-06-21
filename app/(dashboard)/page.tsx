@@ -11,8 +11,9 @@ import { StaggerReveal } from '@/components/motion/StaggerReveal';
 import { StatusBadge } from '@/components/StatusBadge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { db, applications, reports, pipeline } from '@/lib/db';
+import { db, applications, reports, pipeline, profile } from '@/lib/db';
 import { DEMO_MODE, mockApplications, mockReports, mockPipeline } from '@/lib/mock-data';
+import { greetingName } from '@/lib/profile-name';
 import { cn, formatDateLong, scoreColor } from '@/lib/utils';
 
 type Tone = 'up' | 'down' | 'neutral';
@@ -87,13 +88,15 @@ async function getStats() {
       pendingPipeline: pendingPipelineRows.length,
       recentApps: allApps.slice(0, 8),
       deltas: computeDeltas(allApps, pendingPipelineRows),
+      greetingName: greetingName('Demo User'),
     };
   }
 
-  const [allApps, allReports, pendingPipelineRows] = await Promise.all([
+  const [allApps, allReports, pendingPipelineRows, profileNameRows] = await Promise.all([
     db.select().from(applications).orderBy(desc(applications.createdAt)),
     db.select().from(reports).orderBy(desc(reports.createdAt)).limit(5),
     db.select({ addedAt: pipeline.addedAt }).from(pipeline).where(eq(pipeline.status, 'pending')),
+    db.select({ value: profile.value }).from(profile).where(eq(profile.key, 'name')).limit(1),
   ]);
 
   const total = allApps.length;
@@ -118,6 +121,7 @@ async function getStats() {
     pendingPipeline: pendingPipelineRows.length,
     recentApps: allApps.slice(0, 8),
     deltas: computeDeltas(allApps, pendingPipelineRows),
+    greetingName: greetingName(profileNameRows[0]?.value),
   };
 }
 
@@ -171,7 +175,7 @@ export default async function DashboardPage() {
       <DashboardCharts
         scoreDist={stats.scoreDist}
         recentApps={stats.recentApps}
-        greetingName="حمود"
+        greetingName={stats.greetingName}
         activePct={stats.total > 0 ? (stats.applied / stats.total) * 100 : 0}
       />
       </div>

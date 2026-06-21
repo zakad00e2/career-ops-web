@@ -185,7 +185,8 @@ export function SettingsClient() {
             <CardHeader className="pb-3">
               <CardTitle className="text-base">سيرتك الذاتية (Markdown)</CardTitle>
               <p className="text-xs text-muted-foreground">
-                هذا هو المصدر المرجعي للتقييمات وتوليد PDF.
+                هذا هو المصدر المرجعي للتقييمات وتوليد PDF ومسح البوابات.
+                عند تغيير السيرة، يتغيّر تلقائياً ما يظهر في المسح التالي.
                 احتفظ به بصيغة markdown نظيفة مع الأقسام: Summary وExperience وProjects وEducation وSkills.
               </p>
             </CardHeader>
